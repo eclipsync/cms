@@ -15,7 +15,7 @@ use Incodiy\Codiy\Models\Core\Model;
  */
 class ProgramKeren extends Model {
 	protected $connection = 'mysql_mantra_etl';
-	protected $table	    = 'report_data_summary_program_keren';
+	protected $table	  = 'report_data_summary_program_keren';
 	protected $guarded    = [];
 	
 	public function getConnectionName() {

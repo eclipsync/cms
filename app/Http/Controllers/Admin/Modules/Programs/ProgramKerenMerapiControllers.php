@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Modules\Programs;
 
 use Incodiy\Codiy\Controllers\Core\Controller;
 use App\Models\Admin\Modules\Programs\ProgramKerenMerapi;
+use App\Http\Controllers\Admin\Modules\Handler;
 
 /**
  * Created on 19 Feb 2023
@@ -18,6 +19,8 @@ use App\Models\Admin\Modules\Programs\ProgramKerenMerapi;
  */
 
 class ProgramKerenMerapiControllers extends Controller {
+    use Handler;
+    
     public  $data;
     private $fields = [
         'start_date:Period',
@@ -44,18 +47,6 @@ class ProgramKerenMerapiControllers extends Controller {
     
     private function dateInfo($table, $connection = null) {
         return diy_date_info($table, 'start_date', null, $connection);
-    }
-    
-    private function sessionFilters() {
-        if ('root' !== $this->session['user_group']) {
-            if ('outlet' === strtolower($this->session['group_info'])) {
-                $this->filterPage(['outlet_id' => strtolower($this->session['group_alias'])], '=');
-            } else {
-                if ('national' !== strtolower($this->session['group_alias'])) {
-                    $this->filterPage(['region' => $this->session['group_alias']], '=');
-                }
-            }
-        }
     }
     
     public function index() {

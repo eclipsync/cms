@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Modules\Programs;
 
 use Incodiy\Codiy\Controllers\Core\Controller;
 use App\Models\Admin\Modules\Programs\ProgramNatunaAnambas;
+use App\Http\Controllers\Admin\Modules\Handler;
 /**
  * Created on Feb 20, 2023
  * 
@@ -16,6 +17,8 @@ use App\Models\Admin\Modules\Programs\ProgramNatunaAnambas;
  * @email       wisnuwidi@gmail.com
  */
 class ProgramNatunaAnambasControllers extends Controller {
+    use Handler;
+    
 	public  $data;
 	private $fieldSummary = [
 		'period',
@@ -54,18 +57,6 @@ class ProgramNatunaAnambasControllers extends Controller {
 	
 	private function dateInfo($table, $connection = null) {
 		return diy_date_info($table, 'period', null, $connection);
-	}
-	
-	private function sessionFilters() {
-		if ('root' !== $this->session['user_group']) {
-			if ('outlet' === strtolower($this->session['group_info'])) {
-				$this->filterPage(['outlet_id' => strtolower($this->session['group_alias'])], '=');
-			} else {
-				if ('national' !== strtolower($this->session['group_alias'])) {
-					$this->filterPage(['region' => $this->session['group_alias']], '=');
-				}
-			}
-		}
 	}
 	
 	public function index() {
