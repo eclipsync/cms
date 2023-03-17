@@ -70,14 +70,20 @@ Route::group(['middleware' => ['web']], function() {
 		        Route::resource('program_salesforce_canvaser', 'App\Http\Controllers\Admin\Modules\Programs\ProgramSalesforceCanvaserControllers', ['as' => 'modules.programs']);
 		        Route::resource('program_fit',                 'App\Http\Controllers\Admin\Modules\Programs\ProgramFitControllers',                ['as' => 'modules.programs']);
 		        Route::resource('program_kpi_distributors',    'App\Http\Controllers\Admin\Modules\Programs\ProgramKpiDistributorControllers',     ['as' => 'modules.programs']);
+		        
+		        Route::resource('program_keren_pro',           'App\Http\Controllers\Admin\Modules\Programs\KerenProController',                  ['as' => 'modules.programs']);
 		    });
 		    
 	        Route::group(['prefix' => 'kpi'], function() {
-	            Route::resource('distributors',    'App\Http\Controllers\Admin\Modules\Programs\ProgramKpiDistributorControllers',     ['as' => 'modules.kpi']);
+	            Route::resource('distributors', 'App\Http\Controllers\Admin\Modules\Programs\ProgramKpiDistributorControllers', ['as' => 'modules.kpi']);
 	        });
+	        	
+        	Route::group(['prefix' => 'incentive'], function() {
+        		Route::resource('incentive', 'App\Http\Controllers\Admin\Modules\Incentive\IncentiveController', ['as' => 'modules.incentive']);
+        	});
 			
 			Route::group(['prefix' => 'shop'], function() {
-				Route::resource('product', 'App\Http\Controllers\Admin\Modules\Shop\ProductController',   ['as' => 'modules.shop']);
+				Route::resource('product',  'App\Http\Controllers\Admin\Modules\Shop\ProductController',  ['as' => 'modules.shop']);
 				Route::resource('category', 'App\Http\Controllers\Admin\Modules\Shop\CategoryController', ['as' => 'modules.shop']);
 			});
 		});

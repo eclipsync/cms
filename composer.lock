@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a4a406c7f4e2c3293d84f294737305c",
+    "content-hash": "5f724dddc84b66bc87bfbb927530408f",
     "packages": [
         {
             "name": "brick/math",
@@ -1325,8 +1325,13 @@
             "version": "dev-master",
             "dist": {
                 "type": "path",
+<<<<<<< HEAD
                 "url": "G:/worksites/eclipsync/incodiy/.package/codiy",
                 "reference": "10104cd6acdd87311959f680cb43bf634f98c745"
+=======
+                "url": "D:/worksites/incodiy/.plugins/codiy",
+                "reference": "7d02719ae5939a3256d06458b397e456c483e668"
+>>>>>>> branch 'main' of https://github.com/eclipsync/cms.git
             },
             "require": {
                 "doctrine/dbal": "^3.4",
