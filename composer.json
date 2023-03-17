@@ -21,19 +21,11 @@
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0"
     },
-<<<<<<< HEAD
     "repositories" : [{
         "type"      : "path",
         "url"       : "G:/worksites/eclipsync/incodiy/.package/codiy",
         "options"   : {
             "symlink": true
-=======
-    "repositories": [{
-        "type"      : "path",
-        "url"       : "D:/worksites/incodiy/.plugins/codiy",
-        "options"   : {
-            "symlink" : true
->>>>>>> branch 'main' of https://github.com/eclipsync/cms.git
         }
     }],
     "autoload": {
