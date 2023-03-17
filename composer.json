@@ -21,9 +21,12 @@
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0"
     },
-    "repositories" : [{
-        "type"      : "vcs",
-        "url"       : "git@github.com:incodiy/codiy.git"
+    "repositories": [{
+        "type"      : "path",
+        "url"       : "D:/worksites/incodiy/.plugins/codiy",
+        "options"   : {
+            "symlink" : true
+        }
     }],
     "autoload": {
         "psr-4": {
