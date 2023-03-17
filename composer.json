@@ -22,8 +22,11 @@
         "spatie/laravel-ignition": "^2.0"
     },
     "repositories" : [{
-        "type"      : "vcs",
-        "url"       : "git@github.com:incodiy/codiy.git"
+        "type"      : "path",
+        "url"       : "G:/worksites/eclipsync/incodiy/.package/codiy",
+        "options"   : {
+            "symlink": true
+        }
     }],
     "autoload": {
         "psr-4": {
