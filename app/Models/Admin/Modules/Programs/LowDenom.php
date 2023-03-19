@@ -7,7 +7,7 @@ use Incodiy\Codiy\Models\Core\Model;
  * 
  * Time Created : 10:57:03 AM
  *
- * @filesource	ProgramLowDenom.php
+ * @filesource	LowDenom.php
  *
  * @author     wisnuwidi@gmail.com - 2022
  * @copyright  wisnuwidi

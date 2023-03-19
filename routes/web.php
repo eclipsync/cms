@@ -82,11 +82,6 @@ Route::group(['middleware' => ['web']], function() {
         	Route::group(['prefix' => 'incentive'], function() {
         		Route::resource('incentive', 'App\Http\Controllers\Admin\Modules\Incentive\IncentiveController', ['as' => 'modules.incentive']);
         	});
-			
-			Route::group(['prefix' => 'shop'], function() {
-				Route::resource('product',  'App\Http\Controllers\Admin\Modules\Shop\ProductController',  ['as' => 'modules.shop']);
-				Route::resource('category', 'App\Http\Controllers\Admin\Modules\Shop\CategoryController', ['as' => 'modules.shop']);
-			});
 		});
 
 		Route::group(['prefix' => 'ajax'], function() {

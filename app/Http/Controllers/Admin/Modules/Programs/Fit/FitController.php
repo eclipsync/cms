@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\Modules\Handler;
  * 
  * Time Created : 2:02:55 PM
  *
- * @filesource  FitControllers.php
+ * @filesource  FitController.php
  *
  * @author      wisnuwidi@gmail.com - 2023
  * @copyright   wisnuwidi@gmail.com,

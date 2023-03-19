@@ -7,7 +7,7 @@ use Incodiy\Codiy\Models\Core\Model;
  * 
  * Time Created : 2:03:51 PM
  *
- * @filesource  ProgramFit.php
+ * @filesource  Fit.php
  *
  * @author      wisnuwidi@gmail.com - 2023
  * @copyright   wisnuwidi@gmail.com,

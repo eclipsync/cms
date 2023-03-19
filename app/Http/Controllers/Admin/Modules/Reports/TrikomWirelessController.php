@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\Modules\Handler;
  * 
  * Time Created : 21:26:39
  *
- * @filesource  TrikomWirelessControllers.php
+ * @filesource  TrikomWirelessController.php
  *
  * @author      wisnuwidi@gmail.com - 2023
  * @copyright   wisnuwidi@gmail.com,

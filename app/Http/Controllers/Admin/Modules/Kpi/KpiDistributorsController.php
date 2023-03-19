@@ -29,7 +29,7 @@ class KpiDistributorsController extends Controller {
     private $fieldset_asc = [];
     
     public function __construct() {
-        parent::__construct(KpiDistributors::class, 'modules.incentive');
+        parent::__construct(KpiDistributors::class, 'modules.kpi');
     }
     
     private function dateInfo($table, $connection = null) {

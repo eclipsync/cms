@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\Modules\Handler;
  * 
  * Time Created : 4:41:59 PM
  *
- * @filesource  NatunaAnambasControllers.php
+ * @filesource  NatunaAnambasController.php
  *
  * @author      wisnuwidi@gmail.com - 2023
  * @copyright   wisnuwidi@gmail.com,
