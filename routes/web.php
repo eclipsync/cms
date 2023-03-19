@@ -61,21 +61,22 @@ Route::group(['middleware' => ['web']], function() {
 			});
 			
 		    Route::group(['prefix' => 'programs'], function() {
-		        Route::resource('program_keren',               'App\Http\Controllers\Admin\Modules\Programs\ProgramKerenControllers',              ['as' => 'modules.programs']);
-		        Route::resource('program_merapi',              'App\Http\Controllers\Admin\Modules\Programs\ProgramMerapiControllers',             ['as' => 'modules.programs']);
-		        Route::resource('program_keren_merapi',        'App\Http\Controllers\Admin\Modules\Programs\ProgramKerenMerapiControllers',        ['as' => 'modules.programs']);
-		        Route::resource('program_low_denom',           'App\Http\Controllers\Admin\Modules\Programs\ProgramLowDenomControllers',           ['as' => 'modules.programs']);
-		        Route::resource('program_natuna_anambas',      'App\Http\Controllers\Admin\Modules\Programs\ProgramNatunaAnambasControllers',      ['as' => 'modules.programs']);
-		        Route::resource('program_trikom_wireless',     'App\Http\Controllers\Admin\Modules\Programs\ProgramTrikomWirelessControllers',     ['as' => 'modules.programs']);
-		        Route::resource('program_salesforce_canvaser', 'App\Http\Controllers\Admin\Modules\Programs\ProgramSalesforceCanvaserControllers', ['as' => 'modules.programs']);
-		        Route::resource('program_fit',                 'App\Http\Controllers\Admin\Modules\Programs\ProgramFitControllers',                ['as' => 'modules.programs']);
-		        Route::resource('program_kpi_distributors',    'App\Http\Controllers\Admin\Modules\Programs\ProgramKpiDistributorControllers',     ['as' => 'modules.programs']);
+		        Route::resource('keren_pro',           'App\Http\Controllers\Admin\Modules\Programs\Keren\KerenProController',     ['as' => 'modules.programs']);
+		        Route::resource('merapi',              'App\Http\Controllers\Admin\Modules\Programs\Merapi\MerapiController',      ['as' => 'modules.programs']);
 		        
-		        Route::resource('program_keren_pro',           'App\Http\Controllers\Admin\Modules\Programs\KerenProController',                  ['as' => 'modules.programs']);
+		        Route::resource('fit',                 'App\Http\Controllers\Admin\Modules\Programs\Fit\FitController',            ['as' => 'modules.programs']);
+		        Route::resource('fit_pro',             'App\Http\Controllers\Admin\Modules\Programs\Fit\FitProController',         ['as' => 'modules.programs']);
+		        Route::resource('salesforce_canvaser', 'App\Http\Controllers\Admin\Modules\Programs\SalesforceCanvaserController', ['as' => 'modules.programs']);
+		        
+		        Route::resource('low_denom',           'App\Http\Controllers\Admin\Modules\Programs\LowDenomController',           ['as' => 'modules.programs']);
 		    });
-		    
+		        
+	        Route::group(['prefix' => 'reports'], function() {
+	            Route::resource('natuna_anambas',      'App\Http\Controllers\Admin\Modules\Reports\NatunaAnambasController',       ['as' => 'modules.reports']);
+	            Route::resource('trikom_wireless',     'App\Http\Controllers\Admin\Modules\Reports\TrikomWirelessController',      ['as' => 'modules.reports']);
+	        });
 	        Route::group(['prefix' => 'kpi'], function() {
-	            Route::resource('distributors', 'App\Http\Controllers\Admin\Modules\Programs\ProgramKpiDistributorControllers', ['as' => 'modules.kpi']);
+	            Route::resource('distributors', 'App\Http\Controllers\Admin\Modules\Kpi\KpiDistributorsController', ['as' => 'modules.kpi']);
 	        });
 	        	
         	Route::group(['prefix' => 'incentive'], function() {

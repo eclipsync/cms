@@ -62,7 +62,93 @@ class IncentiveController extends Controller {
 		'inctivegrwthnetadd:Incentive Growth Nett Add',
 		'ttlinctive:Total Incentive'
 	];
-	
+	private $fieldset_asm = [
+	    'period_string:Period',
+	    'cor:COR',
+	    'region',
+	    'cluster',
+	    'nik:NIK',
+	    'nama',
+	    'po',
+	    'target_po',
+	    'ach_po',
+	    'bobot',
+	    'score_po',
+	    'bts_revenue',
+	    'target_bts',
+	    'ach_bts_rev',
+	    'bobot_bts_rev',
+	    'score_bts_rev',
+	    'netadd:Nett Add',
+	    'target_netadd:Target Nett Add',
+	    'ach_netadd:ACH Nett Add',
+	    'bobot_netadd:Bobot Nett Add',
+	    'score_netadd:Score Nett Add',
+	    'totalscore:Total Score',
+	    'incentive',
+	    'totalsite:Total Site',
+	    'averagebtsrevenue:AVG BTS Reveenue',
+	    'incentivebtsrev:Incentive BTS Reveenue',
+	    'substhismonth:Subs Bulan Ini',
+	    'max_subs:Max Subs',
+	    'monthmaxsubs:Max Subs Bulanan',
+	    'growthnetadd:Growth Nett Add',
+	    'netaddgrowthincentive:Incentive Growth Nett Add',
+	    'totalincentive:Total Incentive'
+	];
+	private $fieldset_pic_cluster = [
+	    'period_string:Period',
+	    'cor:COR',
+	    'region',
+	    'cluster',
+	    'nik:NIK',
+	    'nama',
+	    'selltrhuactive',
+	    'target_sellthruactive:Target Sellthru Active',
+	    'ach_selltrhuactive:ACH Sellthru Active',
+	    'bobot',
+	    'score_selltrhuactive:Score Sellthru Active',
+	    'bts_revenue',
+	    'target_bts',
+	    'ach_bts_rev',
+	    'bobot_bts_rev',
+	    'score_bts_rev',
+	    'netadd:Nett Add',
+	    'target_netadd:Target Nett Add',
+	    'ach_netadd:ACH Nett Add',
+	    'bobot_netadd:Bobot Nett Add',
+	    'score_netadd:Score Nett Add',
+	    'totalscore:Total Score',
+	    'incentive'
+	];
+	private $fieldset_pic_sub_cluster = [
+	    'period_string:Period',
+	    'cor:COR',
+	    'region',
+	    'cluster',
+	    'nik:NIK',
+	    'nama',
+	    'jabatan',
+	    'selltrhuactive',
+	    'target_selltrhuactive',
+	    'ach_selltrhuactive',
+	    'bobot_selltrhuactive',
+	    'score_selltrhuactive',
+	    'bts_revenue',
+	    'target_bt_rev',
+	    'ach_bts_rev',
+	    'bobot_btsrev',
+	    'score_bts_rev',
+	    'substhismonth',
+	    'subslastmonth',
+	    'netadd',
+	    'target_netadd',
+	    'ach_netadd',
+	    'bobot_netadd',
+	    'score_netadd',
+	    'score_total',
+	    'incentive'
+	];
 	public function __construct() {
 		parent::__construct(Incentive::class, 'modules.incentive');
 	}
@@ -72,73 +158,249 @@ class IncentiveController extends Controller {
 	}
 	
 	public function index() {
-		$this->setPage('Incentive ASC');
+		$this->setPage('Incentive');
 		$this->sessionFilters();
 		
 		$this->removeActionButtons(['add']);
 		
 		$this->table->connection($this->connection);
-		$this->table->setCenterColumns(['cor']);
-		$this->table->setRightColumns([
-			'po',
-			'tgtpo',
-			'achpo',
-			'bbtpo',
-			'scrpo',
-			'btsrev',
-			'tgtbtsrev',
-			'achbtsrev',
-			'bbtbtsrev',
-			'scrbtsrev',
-			'substhismonth',
-			'subslastmonth',
-			'netadd',
-			'tgtnetadd',
-			'achnetadd',
-			'bbtnetadd',
-			'scrnetadd',
-			'scrttl',
-			'inctive',
-			'ttlsite',
-			'avgbtsrev',
-			'inctiveavgbtsrev',
-			'mxsubs',
-			'mxsubsperiod',
-			'grwthnetadd',
-			'inctivegrwthnetadd',
-			'ttlinctive'
-		], true, true);
 		
-		$this->table->format('tgtpo', 0);
-		$this->table->format('achpo', 2);
-		$this->table->format('scrpo', 2);
-		$this->table->format('btsrev', 2);
-		$this->table->format('tgtbtsrev', 0);
-		$this->table->format('achbtsrev', 2);
-		$this->table->format('scrbtsrev', 2);
-		$this->table->format('tgtnetadd', 2);
-		$this->table->format('achnetadd', 2);
-		$this->table->format('scrnetadd', 2);
-		$this->table->format('scrttl', 2);
-		$this->table->format('avgbtsrev', 2);
-		$this->table->format('ttlinctive', 2);
+		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'asc' === strtolower($this->session['group_info'])) {
+    		$this->table->setCenterColumns(['cor']);
+    		$this->table->setRightColumns([
+    			'po',
+    			'tgtpo',
+    			'achpo',
+    			'bbtpo',
+    			'scrpo',
+    			'btsrev',
+    			'tgtbtsrev',
+    			'achbtsrev',
+    			'bbtbtsrev',
+    			'scrbtsrev',
+    			'substhismonth',
+    			'subslastmonth',
+    			'netadd',
+    			'tgtnetadd',
+    			'achnetadd',
+    			'bbtnetadd',
+    			'scrnetadd',
+    			'scrttl',
+    			'inctive',
+    			'ttlsite',
+    			'avgbtsrev',
+    			'inctiveavgbtsrev',
+    			'mxsubs',
+    			'mxsubsperiod',
+    			'grwthnetadd',
+    			'inctivegrwthnetadd',
+    			'ttlinctive'
+    		], true, true);
+    		
+    		$this->table->format('tgtpo', 0);
+    		$this->table->format('achpo', 2);
+    		$this->table->format('scrpo', 2);
+    		$this->table->format('btsrev', 2);
+    		$this->table->format('tgtbtsrev', 0);
+    		$this->table->format('achbtsrev', 2);
+    		$this->table->format('scrbtsrev', 2);
+    		$this->table->format('tgtnetadd', 2);
+    		$this->table->format('achnetadd', 2);
+    		$this->table->format('scrnetadd', 2);
+    		$this->table->format('scrttl', 2);
+    		$this->table->format('avgbtsrev', 2);
+    		$this->table->format('ttlinctive', 2);
+    		
+    		$this->table->filterGroups('period_string', 'selectbox', true);
+    		$this->table->filterGroups('cor', 'selectbox', true);
+    		$this->table->filterGroups('region', 'selectbox', true);
+    		$this->table->filterGroups('cluster', 'selectbox');
+    		
+    		$this->table->clickable(false);
+    		$this->table->sortable();
+    		
+    		$this->table->openTab('Summary ASC');
+    		$this->table->searchable(['period_string', 'cor', 'region', 'cluster']);
+    		$this->table->label(' ');
+    		$this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo($this->model_table, $this->connection) . '</p>');
+    		
+    		$this->table->displayRowsLimitOnLoad('*');
+    		$this->table->lists($this->model_table, $this->fieldset_asc, false);
+    		$this->table->clearOnLoad();
+		}
 		
-		$this->table->filterGroups('period_string', 'selectbox', true);
-		$this->table->filterGroups('cor', 'selectbox', true);
-		$this->table->filterGroups('region', 'selectbox', true);
-		$this->table->filterGroups('cluster', 'selectbox');
+		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'asm' === strtolower($this->session['group_info'])) {
+		    $this->table->setCenterColumns(['cor']);
+		    $this->table->setRightColumns([
+		        'po',
+		        'target_po',
+		        'ach_po',
+		        'bobot',
+		        'score_po',
+		        'bts_revenue',
+		        'target_bts',
+		        'ach_bts_rev',
+		        'bobot_bts_rev',
+		        'score_bts_rev',
+		        'netadd',
+		        'target_netadd',
+		        'ach_netadd',
+		        'bobot_netadd',
+		        'score_netadd',
+		        'totalscore',
+		        'incentive',
+		        'totalsite',
+		        'averagebtsrevenue',
+		        'incentivebtsrev',
+		        'substhismonth',
+		        'max_subs',
+		        'monthmaxsubs',
+		        'growthnetadd',
+		        'netaddgrowthincentive',
+		        'totalincentive'
+		    ], true, true);
+		    
+		    $this->table->format('target_po', 0);
+		    $this->table->format('ach_po', 2);
+		    $this->table->format('scrpo', 2);
+		    $this->table->format('bts_revenue', 2);
+		    $this->table->format('target_bts', 0);
+		    $this->table->format('ach_bts_rev', 2);
+		    $this->table->format('score_bts_rev', 2);
+		    $this->table->format('target_netadd', 2);
+		    $this->table->format('ach_netadd', 2);
+		    $this->table->format('score_netadd', 2);
+		    $this->table->format('totalscore', 2);
+		    $this->table->format('averagebtsrevenue', 2);
+		    $this->table->format('totalincentive', 2);
+		    
+		    $this->table->filterGroups('period_string', 'selectbox', true);
+		    $this->table->filterGroups('cor', 'selectbox', true);
+		    $this->table->filterGroups('region', 'selectbox', true);
+		    $this->table->filterGroups('cluster', 'selectbox');
+		    
+		    $this->table->clickable(false);
+		    $this->table->sortable();
+		    
+		    $this->table->openTab('Summary ASM');
+		    $this->table->searchable(['period_string', 'cor', 'region', 'cluster']);
+		    $this->table->label(' ');
+		    $this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo('report_data_summary_incentive_asm', $this->connection) . '</p>');
+		    
+		    $this->table->displayRowsLimitOnLoad('*');
+		    $this->table->lists('report_data_summary_incentive_asm', $this->fieldset_asm, false);
+		    $this->table->clearOnLoad();
+		}
 		
-		$this->table->clickable(false);
-		$this->table->sortable();
+		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'pic_cluster' === strtolower($this->session['group_info'])) {
+		    $this->table->setCenterColumns(['cor']);
+		    $this->table->setRightColumns([
+		        'selltrhuactive',
+		        'target_sellthruactive',
+		        'ach_selltrhuactive',
+		        'bobot',
+		        'score_selltrhuactive',
+		        'bts_revenue',
+		        'target_bts',
+		        'ach_bts_rev',
+		        'bobot_bts_rev',
+		        'score_bts_rev',
+		        'netadd',
+		        'target_netadd',
+		        'ach_netadd',
+		        'bobot_netadd',
+		        'score_netadd',
+		        'totalscore',
+		        'incentive'
+		    ], true, true);
+		    
+		    $this->table->format('selltrhuactive', 0);
+		    $this->table->format('target_sellthruactive', 2);
+		    $this->table->format('ach_selltrhuactive', 2);
+		    $this->table->format('bts_revenue', 2);
+		    $this->table->format('target_bts', 0);
+		    $this->table->format('ach_bts_rev', 2);
+		    $this->table->format('score_bts_rev', 2);
+		    $this->table->format('netadd', 0);
+		    $this->table->format('target_netadd', 2);
+		    $this->table->format('ach_netadd', 2);
+		    $this->table->format('score_netadd', 2);
+		    $this->table->format('totalscore', 2);
+		    $this->table->format('totalincentive', 2);
+		    
+		    $this->table->filterGroups('period_string', 'selectbox', true);
+		    $this->table->filterGroups('cor', 'selectbox', true);
+		    $this->table->filterGroups('region', 'selectbox', true);
+		    $this->table->filterGroups('cluster', 'selectbox');
+		    
+		    $this->table->clickable(false);
+		    $this->table->sortable();
+		    
+		    $this->table->openTab('Summary PIC Cluster');
+		    $this->table->searchable(['period_string', 'cor', 'region', 'cluster']);
+		    $this->table->label(' ');
+		    $this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo('report_data_summary_incentive_pic_cluster', $this->connection) . '</p>');
+		    
+		    $this->table->displayRowsLimitOnLoad('*');
+		    $this->table->lists('report_data_summary_incentive_pic_cluster', $this->fieldset_pic_cluster, false);
+		    $this->table->clearOnLoad();
+		}
 		
-		$this->table->openTab('Summary');
-		$this->table->searchable(['period_string', 'cor', 'region', 'cluster']);
-		$this->table->label(' ');
-		$this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo($this->model_table, $this->connection) . '</p>');
-		
-		$this->table->displayRowsLimitOnLoad('*');
-		$this->table->lists($this->model_table, $this->fieldset_asc, false);
-		$this->table->clearOnLoad();
+		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'pic_sub_cluster' === strtolower($this->session['group_info'])) {
+		    $this->table->setCenterColumns(['cor']);
+		    $this->table->setRightColumns([
+		        'selltrhuactive',
+		        'target_selltrhuactive',
+		        'ach_selltrhuactive',
+		        'bobot_selltrhuactive',
+		        'score_selltrhuactive',
+		        'bts_revenue',
+		        'target_bt_rev',
+		        'ach_bts_rev',
+		        'bobot_btsrev',
+		        'score_bts_rev',
+		        'substhismonth',
+		        'subslastmonth',
+		        'netadd',
+		        'target_netadd',
+		        'ach_netadd',
+		        'bobot_netadd',
+		        'score_netadd',
+		        'score_total',
+		        'incentive'
+		    ], true, true);
+		    
+		    $this->table->format('selltrhuactive', 0);
+		    $this->table->format('target_sellthruactive', 2);
+		    $this->table->format('ach_selltrhuactive', 2);
+		    $this->table->format('bts_revenue', 2);
+		    $this->table->format('target_bts', 0);
+		    $this->table->format('ach_bts_rev', 2);
+		    $this->table->format('score_bts_rev', 2);
+		    $this->table->format('netadd', 0);
+		    $this->table->format('target_netadd', 2);
+		    $this->table->format('ach_netadd', 2);
+		    $this->table->format('score_netadd', 2);
+		    $this->table->format('totalscore', 2);
+		    $this->table->format('totalincentive', 2);
+		    
+		    $this->table->filterGroups('period_string', 'selectbox', true);
+		    $this->table->filterGroups('cor', 'selectbox', true);
+		    $this->table->filterGroups('region', 'selectbox', true);
+		    $this->table->filterGroups('cluster', 'selectbox');
+		    
+		    $this->table->clickable(false);
+		    $this->table->sortable();
+		    
+		    $this->table->openTab('Summary PIC Sub Cluster');
+		    $this->table->searchable(['period_string', 'cor', 'region', 'cluster']);
+		    $this->table->label(' ');
+		    $this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo('report_data_summary_incentive_pic_sub_cluster', $this->connection) . '</p>');
+		    
+		    $this->table->displayRowsLimitOnLoad('*');
+		    $this->table->lists('report_data_summary_incentive_pic_sub_cluster', $this->fieldset_pic_sub_cluster, false);
+		    $this->table->clearOnLoad();
+		}
 		
 		$this->table->closeTab();
 		
