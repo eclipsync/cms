@@ -16,7 +16,7 @@ use Incodiy\Codiy\Models\Core\Model;
  */
 class FitPro extends Model {
     protected $connection = 'mysql_mantra_etl';
-    protected $table      = 'report_data_summary_program_fit_pro_act_performance';
+    protected $table      = 'report_data_summary_program_fit_pro';
     protected $tableView  = true;
     protected $guarded    = [];
     

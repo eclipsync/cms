@@ -28,21 +28,16 @@ class FitProController extends Controller {
         'sub_cluster',
         'outlet_id',
         'outlet_name',
-        'act_total',
-        'act_new_imei',
-        'act_old_imei',
-        'act_no_imei',
-        'act_by_sgs',
-        'act_by_non_sgs',
-        'act_by_sgs_new_imei',
-        'act_by_non_sgs_new_imei',
-        'reward',
-        'add_act_new_imei',
-        'reward_extra',
-        'total_reward',
-        'reward_month_90_days',
-        'mdn_active_90_days:MDN Active 90 Days',
-        'reward_extra_2'
+    		
+    	'total_act',
+    	'total_act_non_sgs',
+    	'act_new_imei_non_sgs',
+    	'range_act_new_imei_non_sgs',
+    	'total_act_sgs',
+    	'act_sgs_new_imei',
+    	'rate_act_new_imei_non_sgs',
+    	'rate_act_new_imei_sgs',
+    	'flag_outlet_om_sgs'
     ];
     
     public function __construct() {
@@ -64,9 +59,10 @@ class FitProController extends Controller {
         if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || in_array($this->session['group_alias'], ['National'])) {
             $this->table->openTab('Summary');
             
-            $this->table->displayRowsLimitOnLoad(20);
-            $this->table->setRightColumns(['act_fit_point']);
+            $this->table->setCenterColumns(['cor']);
+            $this->table->setRightColumns(['total_act', 'total_act_non_sgs', 'act_new_imei_non_sgs', 'range_act_new_imei_non_sgs', 'total_act_sgs', 'act_sgs_new_imei', 'rate_act_new_imei_non_sgs', 'rate_act_new_imei_sgs', 'flag_outlet_om_sgs']);
             
+            $this->table->displayRowsLimitOnLoad(20);
             $this->table->label(' ');
             if (!empty($this->dateInfo($this->model_table, $this->connection))) {
                 $this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo($this->model_table, $this->connection) . '</p>');

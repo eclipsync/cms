@@ -72,8 +72,9 @@ Route::group(['middleware' => ['web']], function() {
 		    });
 		        
 	        Route::group(['prefix' => 'reports'], function() {
-	            Route::resource('natuna_anambas',      'App\Http\Controllers\Admin\Modules\Reports\NatunaAnambasController',       ['as' => 'modules.reports']);
-	            Route::resource('trikom_wireless',     'App\Http\Controllers\Admin\Modules\Reports\TrikomWirelessController',      ['as' => 'modules.reports']);
+	        	Route::resource('natuna_anambas',      'App\Http\Controllers\Admin\Modules\Reports\NatunaAnambasController',       ['as' => 'modules.reports']);
+	        	Route::resource('trikom_wireless',     'App\Http\Controllers\Admin\Modules\Reports\TrikomWirelessController',      ['as' => 'modules.reports']);
+	        	Route::resource('challange',           'App\Http\Controllers\Admin\Modules\Reports\ChallangeController',           ['as' => 'modules.reports']);
 	        });
 	        Route::group(['prefix' => 'kpi'], function() {
 	            Route::resource('distributors', 'App\Http\Controllers\Admin\Modules\Kpi\KpiDistributorsController', ['as' => 'modules.kpi']);
