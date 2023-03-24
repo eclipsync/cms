@@ -18,14 +18,14 @@ trait Handler {
     private $roleInfo  = ['National'];
     
     private function sessionFilters() {
-        if ('root' !== $this->session['user_group']) {
-            if (!in_array($this->session['user_group'], $this->roleAlias) && !in_array($this->session['group_alias'], $this->roleInfo)) {
-                if ('outlet' === strtolower($this->session['group_info'])) {
-                    $this->filterPage(['outlet_id' => strtolower($this->session['username'])], '=');
-                } else {
-                    $this->filterPage(['region' => ''], '=');
-                }
-            }
-        }
+    	if ('root' !== $this->session['user_group']) {
+    		if (!in_array($this->session['user_group'], $this->roleAlias) && !in_array($this->session['group_alias'], $this->roleInfo)) {
+    			if ('outlet' === strtolower($this->session['group_info'])) {
+    				$this->filterPage(['outlet_id' => strtolower($this->session['username'])], '=');
+    			} else {
+    				$this->filterPage(['region' => $this->session['group_alias']], '=');
+    			}
+    		}
+    	}
     }
 }

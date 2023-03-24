@@ -62,7 +62,8 @@ class MerapiController extends Controller {
         
         $this->table->connection($this->connection);
         
-        if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || in_array($this->session['group_info'], ['ho'])) {
+	//	if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || in_array($this->session['group_info'], ['ho'])) {
+		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
             $this->table->setCenterColumns(['cor', 'achievement']);
             $this->table->setRightColumns([
                 'total_all_revenue',

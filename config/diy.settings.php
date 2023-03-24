@@ -32,7 +32,7 @@ if (true === $multiPlatform) {
 }
 
 return [
-	'baseURL'             => 'http://localhost/eclipsync/incodiy/.dev/public',
+	'baseURL'             => url()->to('/'),//'http://localhost/eclipsync/incodiy/.dev/public',
 	'index_folder'        => 'public',
 	'template'            => 'default',
 	'base_template'       => 'assets/templates',
@@ -50,12 +50,12 @@ return [
 	// so, the application will be read based on this file set.
 		
 	// PLATFORM
-	'platform_type'       => $platform['type'],	// ['single', 'multiple']
-	'platform_table'      => $platform['table'],	// if single = false
-	'platform_key'        => $platform['key'],	// if single = false
-	'platform_name'       => $platform['name'],	// if single = false
-	'platform_label'      => $platform['label'],	// if single = false
-	'platform_route'      => $platform['route'],	// if single = false
+	'platform_type'       => $platform['type'],  // ['single', 'multiple']
+	'platform_table'      => $platform['table'], // if single = false
+	'platform_key'        => $platform['key'],   // if single = false
+	'platform_name'       => $platform['name'],  // if single = false
+	'platform_label'      => $platform['label'], // if single = false
+	'platform_route'      => $platform['route'], // if single = false
 	
 	// COPYRIGHT INFO
 	'copyrights'          => 'CoDIY & All Muslim in the world',
