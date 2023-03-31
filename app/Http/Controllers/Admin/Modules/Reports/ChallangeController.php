@@ -117,9 +117,6 @@ class ChallangeController extends Controller {
 		$this->table->sortable(false);
 		$this->table->orderby('id', 'asc');
 		
-		$this->table->filterGroups('period_string', 'selectbox', true);
-		$this->table->filterGroups('cor', 'selectbox');
-		
 		$this->table->displayRowsLimitOnLoad('*');
 		$this->table->lists($this->model_table, $this->fieldSummary, false);
 		

@@ -16,7 +16,7 @@ use Incodiy\Codiy\Models\Core\Model;
  */
 class Merapi extends Model {
     protected $connection = 'mysql_mantra_etl';
-    protected $table	  = 'report_data_summary_program_merapi_monthly_national';
+    protected $table	  = 'report_data_summary_program_merapi';
     protected $guarded    = [];
     
     public function getConnectionName() {

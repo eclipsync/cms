@@ -56,9 +56,10 @@ class FitProController extends Controller {
         
         $this->table->connection($this->connection);
         
-        if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || in_array($this->session['group_alias'], ['National'])) {
+        if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
+    //  if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || in_array($this->session['group_alias'], ['National'])) {
             $this->table->openTab('Summary');
-            
+            $this->table->addTabContent('<p>Data Update: D-3</p>');
             $this->table->setCenterColumns(['cor']);
             $this->table->setRightColumns(['total_act', 'total_act_non_sgs', 'act_new_imei_non_sgs', 'range_act_new_imei_non_sgs', 'total_act_sgs', 'act_sgs_new_imei', 'rate_act_new_imei_non_sgs', 'rate_act_new_imei_sgs', 'flag_outlet_om_sgs']);
             

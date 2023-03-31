@@ -25,25 +25,25 @@ class MerapiController extends Controller {
     private $_set_tab     = [];
     private $_tab_config  = [];
     private $_hide_fields = ['id'];
-    private $fieldset_asc = [
-        'period_string',
-        'program_name:Program',
-        'cor:COR',
-        'region',
-        'cluster',
-        'sub_cluster',
-        'outlet_id',
-        'outlet_name:Nama Outlet',
-        'class_program:Kelas Program',
-        'target',
-        'total_all_revenue',
-        'total_inner_revenue',
-        'achievement',
-        'revenue_inner_sp_new_imei',
-        'revenue_inner_sp',
-        'revenue_inner_vd',
-        'revenue_inner_paket_data',
-        'total_activation'
+    private $fieldsets = [
+    	'period_string:Period',
+    	'flag_program:Program',
+    	'cor:COR',
+    	'region',
+    	'cluster',
+    	'sub_cluster',
+    	'outlet_id',
+    	'outlet_name:Nama Outlet',
+    	'class_program:Kelas Program',
+    	'target',
+    	'total_all_revenue',
+    	'total_inner_revenue',
+    	'achievement:Ach Range Target',
+    	'revenue_inner_sp_new_imei',
+    	'revenue_inner_sp',
+    	'revenue_inner_vd',
+    	'revenue_inner_paket_data',
+    	'total_activation',
     ];
     
     public function __construct() {
@@ -98,19 +98,19 @@ class MerapiController extends Controller {
             if (!empty($this->dateInfo($this->model_table, $this->connection))) {
                 $this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo($this->model_table, $this->connection) . '</p>');
             }
-            $this->table->lists($this->model_table, $this->fieldset_asc, false);
+            $this->table->lists($this->model_table, $this->fieldsets, false);
             $this->table->clearOnLoad();
         }
         
         if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' === strtolower($this->session['group_info'])) {
             $this->table->openTab('Summary Outlet');
             $this->table->displayRowsLimitOnLoad(20);
-            $this->table->searchable(['period_string', 'cor', 'region', 'cluster']);
+            $this->table->searchable(['period_string', 'region', 'cluster']);
             $this->table->label(' ');
-            if (!empty($this->dateInfo('report_data_summary_program_merapi_monthly_outlet', $this->connection))) {
-                $this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo('report_data_summary_program_merapi_monthly_outlet', $this->connection) . '</p>');
+            if (!empty($this->dateInfo('report_data_summary_program_merapi_outlets', $this->connection))) {
+                $this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo('report_data_summary_program_merapi_outlets', $this->connection) . '</p>');
             }
-            $this->table->lists('report_data_summary_program_merapi_monthly_outlet', $this->fieldset_asc, false);
+            $this->table->lists('report_data_summary_program_merapi_outlets', $this->fieldsets, false);
             $this->table->clearOnLoad();
         }
         $this->table->closeTab();

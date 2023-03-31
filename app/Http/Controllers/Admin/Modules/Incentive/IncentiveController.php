@@ -53,7 +53,7 @@ class IncentiveController extends Controller {
 		'scrnetadd:Skor Nett Add',
 		'scrttl:Skor Total',
 		'inctive:Incentive',
-		'ttlsite:Total Incentive',
+		'ttlsite:Total Site',
 		'avgbtsrev:AVG BTS Rev',
 		'inctiveavgbtsrev:Incentive Rev AVG BTS ',
 		'mxsubs:Max Subs',
@@ -149,6 +149,7 @@ class IncentiveController extends Controller {
 	    'score_total',
 	    'incentive'
 	];
+	
 	public function __construct() {
 		parent::__construct(Incentive::class, 'modules.incentive');
 	}
@@ -165,7 +166,7 @@ class IncentiveController extends Controller {
 		
 		$this->table->connection($this->connection);
 		
-		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'asc' === strtolower($this->session['group_info'])) {
+		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || in_array($this->session['group_alias'], ['National']) || 'asc' === strtolower($this->session['group_info'])) {
     		$this->table->setCenterColumns(['cor']);
     		$this->table->setRightColumns([
     			'po',
@@ -204,12 +205,28 @@ class IncentiveController extends Controller {
     		$this->table->format('tgtbtsrev', 0);
     		$this->table->format('achbtsrev', 2);
     		$this->table->format('scrbtsrev', 2);
+    		$this->table->format('substhismonth', 0);
+    		$this->table->format('subslastmonth', 0);
+    		$this->table->format('netadd', 0);
     		$this->table->format('tgtnetadd', 2);
     		$this->table->format('achnetadd', 2);
     		$this->table->format('scrnetadd', 2);
     		$this->table->format('scrttl', 2);
     		$this->table->format('avgbtsrev', 2);
-    		$this->table->format('ttlinctive', 2);
+    		$this->table->format('inctive', 2);
+    		$this->table->format('inctiveavgbtsrev', 2);
+    		$this->table->format('mxsubs', 0);
+    		$this->table->format('grwthnetadd', 0);
+    		$this->table->format('inctivegrwthnetadd', 0);
+    		$this->table->format('ttlinctive', 0);
+			
+    		$this->table->columnCondition('achpo', 'cell', '>=', 1, 'suffix', ' %');
+    		$this->table->columnCondition('scrpo', 'cell', '>=', 1, 'suffix', ' %');
+    		$this->table->columnCondition('achbtsrev', 'cell', '>=', 1, 'suffix', ' %');
+    		$this->table->columnCondition('achnetadd', 'cell', '>=', 1, 'suffix', ' %');
+    		$this->table->columnCondition('scrnetadd', 'cell', '>=', 1, 'suffix', ' %');
+    		$this->table->columnCondition('scrbtsrev', 'cell', '>=', 1, 'suffix', ' %');
+    		$this->table->columnCondition('scrttl', 'cell', '>=', 1, 'suffix', ' %');
     		
     		$this->table->filterGroups('period_string', 'selectbox', true);
     		$this->table->filterGroups('cor', 'selectbox', true);
@@ -229,7 +246,38 @@ class IncentiveController extends Controller {
     		$this->table->clearOnLoad();
 		}
 		
-		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'asm' === strtolower($this->session['group_info'])) {
+		$this->table->format('score_po', 2);		
+		$this->table->format('target_po', 0);
+		$this->table->format('ach_po', 2);
+		$this->table->format('scrpo', 2);
+		$this->table->format('bts_revenue', 2);
+		$this->table->format('target_bts', 0);
+		$this->table->format('ach_bts_rev', 2);
+		$this->table->format('score_bts_rev', 2);
+		$this->table->format('target_netadd', 2);
+		$this->table->format('ach_netadd', 2);
+		$this->table->format('score_netadd', 2);
+		$this->table->format('totalscore', 2);
+		$this->table->format('averagebtsrevenue', 2);
+		
+		$this->table->format('substhismonth', 0);
+		$this->table->format('subslastmonth', 0);
+		$this->table->format('netadd', 0);
+		$this->table->format('max_subs', 0);
+		$this->table->format('growthnetadd', 0);
+		$this->table->format('netaddgrowthincentive', 0);
+		$this->table->format('totalsite', 0);
+		$this->table->format('incentivebtsrev', 0);
+		
+		$this->table->columnCondition('ach_po', 'cell', '>=', 1, 'suffix', ' %');
+		$this->table->columnCondition('bobot', 'cell', '>=', 1, 'suffix', ' %');
+		$this->table->columnCondition('score_po', 'cell', '>=', 1, 'suffix', ' %');
+		$this->table->columnCondition('score_bts_rev', 'cell', '>=', 1, 'suffix', ' %');
+		$this->table->columnCondition('ach_netadd', 'cell', '>=', 1, 'suffix', ' %');
+		$this->table->columnCondition('score_netadd', 'cell', '>=', 1, 'suffix', ' %');
+		$this->table->columnCondition('totalscore', 'cell', '>=', 1, 'suffix', ' %');
+		
+		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || in_array($this->session['group_alias'], ['National'])  || 'asm' === strtolower($this->session['group_info'])) {
 		    $this->table->setCenterColumns(['cor']);
 		    $this->table->setRightColumns([
 		        'po',
@@ -260,19 +308,12 @@ class IncentiveController extends Controller {
 		        'totalincentive'
 		    ], true, true);
 		    
-		    $this->table->format('target_po', 0);
-		    $this->table->format('ach_po', 2);
-		    $this->table->format('scrpo', 2);
-		    $this->table->format('bts_revenue', 2);
-		    $this->table->format('target_bts', 0);
-		    $this->table->format('ach_bts_rev', 2);
-		    $this->table->format('score_bts_rev', 2);
-		    $this->table->format('target_netadd', 2);
-		    $this->table->format('ach_netadd', 2);
-		    $this->table->format('score_netadd', 2);
-		    $this->table->format('totalscore', 2);
-		    $this->table->format('averagebtsrevenue', 2);
-		    $this->table->format('totalincentive', 2);
+		    $this->table->format('max_subs', 0);
+		    $this->table->format('monthmaxsubs', 0);
+		    $this->table->format('totalincentive', 0);
+		    
+		    $this->table->columnCondition('score_po', 'cell', '>=', 1, 'suffix', ' %');
+		    $this->table->columnCondition('ach_bts_rev', 'cell', '>=', 1, 'suffix', ' %');
 		    
 		    $this->table->filterGroups('period_string', 'selectbox', true);
 		    $this->table->filterGroups('cor', 'selectbox', true);
@@ -292,7 +333,15 @@ class IncentiveController extends Controller {
 		    $this->table->clearOnLoad();
 		}
 		
-		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'pic_cluster' === strtolower($this->session['group_info'])) {
+		$this->table->format('selltrhuactive', 0);
+		$this->table->format('target_sellthruactive', 2);
+		$this->table->format('ach_selltrhuactive', 2);
+		$this->table->format('score_selltrhuactive', 2);
+		
+		$this->table->columnCondition('ach_selltrhuactive', 'cell', '>=', 1, 'suffix', ' %');
+		$this->table->columnCondition('score_selltrhuactive', 'cell', '>=', 1, 'suffix', ' %');
+		
+		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || in_array($this->session['group_alias'], ['National'])  || 'pic_cluster' === strtolower($this->session['group_info'])) {
 		    $this->table->setCenterColumns(['cor']);
 		    $this->table->setRightColumns([
 		        'selltrhuactive',
@@ -314,19 +363,8 @@ class IncentiveController extends Controller {
 		        'incentive'
 		    ], true, true);
 		    
-		    $this->table->format('selltrhuactive', 0);
-		    $this->table->format('target_sellthruactive', 2);
-		    $this->table->format('ach_selltrhuactive', 2);
-		    $this->table->format('bts_revenue', 2);
-		    $this->table->format('target_bts', 0);
-		    $this->table->format('ach_bts_rev', 2);
-		    $this->table->format('score_bts_rev', 2);
-		    $this->table->format('netadd', 0);
-		    $this->table->format('target_netadd', 2);
-		    $this->table->format('ach_netadd', 2);
-		    $this->table->format('score_netadd', 2);
-		    $this->table->format('totalscore', 2);
-		    $this->table->format('totalincentive', 2);
+		    $this->table->columnCondition('ach_bts_rev', 'cell', '>=', 1, 'suffix', ' %');
+		    $this->table->columnCondition('ach_selltrhuactive', 'cell', '>=', 1, 'suffix', ' %');
 		    
 		    $this->table->filterGroups('period_string', 'selectbox', true);
 		    $this->table->filterGroups('cor', 'selectbox', true);
@@ -346,7 +384,7 @@ class IncentiveController extends Controller {
 		    $this->table->clearOnLoad();
 		}
 		
-		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'pic_sub_cluster' === strtolower($this->session['group_info'])) {
+		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || in_array($this->session['group_alias'], ['National'])  || 'pic_sub_cluster' === strtolower($this->session['group_info'])) {
 		    $this->table->setCenterColumns(['cor']);
 		    $this->table->setRightColumns([
 		        'selltrhuactive',
@@ -371,18 +409,12 @@ class IncentiveController extends Controller {
 		    ], true, true);
 		    
 		    $this->table->format('selltrhuactive', 0);
-		    $this->table->format('target_sellthruactive', 2);
-		    $this->table->format('ach_selltrhuactive', 2);
-		    $this->table->format('bts_revenue', 2);
-		    $this->table->format('target_bts', 0);
-		    $this->table->format('ach_bts_rev', 2);
-		    $this->table->format('score_bts_rev', 2);
-		    $this->table->format('netadd', 0);
-		    $this->table->format('target_netadd', 2);
-		    $this->table->format('ach_netadd', 2);
-		    $this->table->format('score_netadd', 2);
-		    $this->table->format('totalscore', 2);
-		    $this->table->format('totalincentive', 2);
+		    $this->table->format('target_selltrhuactive', 2);
+		    $this->table->format('target_bt_rev', 2);
+		    $this->table->format('incentive', 0);
+		    
+		    $this->table->columnCondition('ach_bts_rev', 'cell', '>=', 1, 'suffix', ' %');
+		    $this->table->columnCondition('ach_selltrhuactive', 'cell', '>=', 1, 'suffix', ' %');
 		    
 		    $this->table->filterGroups('period_string', 'selectbox', true);
 		    $this->table->filterGroups('cor', 'selectbox', true);

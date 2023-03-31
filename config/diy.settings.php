@@ -75,6 +75,12 @@ return [
 		'type'             => 'X-UA-Compatible',
 		'content'          => 'IE=edge,chrome=1'
 	],
+		
+	'user' => [
+		'alias_label'        => 'Group Location',
+		'alias_placeholder'  => ':filterName|value (separated by [,]colon)',
+		'alias_session_name' => 'user_locations'
+	],
 	
 	'log_activity'        => [
 		'run_status'       => 'unexceptions',
