@@ -23,7 +23,7 @@
     },
     "repositories" : [{
         "type"      : "path",
-        "url"       : "G:/worksites/eclipsync/incodiy/.package/codiy",
+        "url"       : "G:/worksites/eclipsync/.incodiy/package/codiy",
         "options"   : {
             "symlink": true
         }
