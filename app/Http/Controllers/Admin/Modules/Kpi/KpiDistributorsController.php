@@ -98,7 +98,6 @@ class KpiDistributorsController extends Controller {
 			<p style="margin-bottom: 1px !important;"><i><b>* KPI Sellin still under development for checking usage on Eload & Package</b></i></p>
 		');
         
-        $this->table->displayRowsLimitOnLoad(15);
         $this->table->lists($this->model_table, $this->fieldsets, false);
         $this->table->clearOnLoad();
         
