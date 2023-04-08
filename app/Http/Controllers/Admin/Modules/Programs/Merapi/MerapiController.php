@@ -98,9 +98,11 @@ class MerapiController extends Controller {
             if (!empty($this->dateInfo($this->model_table, $this->connection))) {
                 $this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo($this->model_table, $this->connection) . '</p>');
             }
+            $this->table->fixedColumns(5, 2);
             $this->table->lists($this->model_table, $this->fieldsets, false);
+            $this->table->clearFixedColumns();
             $this->table->clearOnLoad();
-        }
+		}
         
         if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' === strtolower($this->session['group_info'])) {
             $this->table->openTab('Summary Outlet');

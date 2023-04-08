@@ -157,8 +157,8 @@ class KerenProController extends Controller {
 		$this->table->filterGroups('region', 'selectbox', true);
 		$this->table->filterGroups('cluster', 'selectbox');
 		
-		$this->table->columnCondition('total_achivement', 'cell', '!=', '', 'suffix', ' %');
-		$this->table->columnCondition('sp_achievement', 'cell', '!=', '', 'suffix', ' %');
+		$this->table->columnCondition('total_achivement', 'cell', '<=', 0, 'suffix', ' %');
+		$this->table->columnCondition('sp_achievement', 'cell', '<=', 0, 'suffix', ' %');
 		
 	//	$this->table->displayRowsLimitOnLoad(5);
 		
