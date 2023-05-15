@@ -61,7 +61,8 @@ Route::group(['middleware' => ['web']], function() {
 			});
 			
 		    Route::group(['prefix' => 'programs'], function() {
-		        Route::resource('keren_pro',           'App\Http\Controllers\Admin\Modules\Programs\Keren\KerenProController',     ['as' => 'modules.programs']);
+		        Route::resource('keren_pro',           'App\Http\Controllers\Admin\Modules\Programs\Keren\KerenProController',     ['as' => 'modules.programs']);		        
+		        Route::resource('keren_pro_data',      'App\Http\Controllers\Admin\Modules\Programs\Keren\KerenProDataController', ['as' => 'modules.programs']);
 		        Route::resource('merapi',              'App\Http\Controllers\Admin\Modules\Programs\Merapi\MerapiController',      ['as' => 'modules.programs']);
 		        
 		        Route::resource('fit',                 'App\Http\Controllers\Admin\Modules\Programs\Fit\FitController',            ['as' => 'modules.programs']);

@@ -154,6 +154,13 @@ return [
 				],
 				'css' => [null]
 			],
+				
+			'apex' => [
+				'js' => [
+					'top:js/apexcharts.min.js'
+				],
+				'css' => [null]
+			],
 			
 			'chartjs' => [
 				'js'  => [

@@ -16,8 +16,10 @@ use Incodiy\Codiy\Controllers\Core\Controller;
  * @email		wisnuwidi@gmail.com
  */
  
-class FormController extends Controller {
+class FormController extends Form {
 	use Handler;
+	
+	/*
 	
 	public  $data;
 	private $fieldSummary = [
@@ -109,7 +111,7 @@ class FormController extends Controller {
 			'actual_subs_per_bts',
 			'actual_rev_per_bts'
 		]);
-		 */
+		 *
 		$this->table->label(' ');
 		$this->table->addTabContent('<p>As of: ' . $this->dateInfo($this->model_table, $this->connection) . '</p>');
 		$this->table->searchable(['period_string', 'cor']);
@@ -165,5 +167,5 @@ Highcharts.chart('container', {
     }
 });
 </script>";
-	}
+	}*/
 }

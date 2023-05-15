@@ -93,7 +93,7 @@ class KerenProController extends Controller {
 	];
 	
 	public function __construct() {
-		parent::__construct(KerenPro::class, 'modules.incentive');
+		parent::__construct(KerenPro::class, 'modules.programs');
 	}
 	
 	private function dateInfo($table, $connection = null) {
