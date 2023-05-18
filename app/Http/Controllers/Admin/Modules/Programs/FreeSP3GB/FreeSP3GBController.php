@@ -54,6 +54,8 @@ class FreeSP3GBController extends Controller {
         $this->table->connection($this->connection);
         
         if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
+            
+            $this->table->openTab('Summary');
             $this->table->mergeColumns('Activation NEW IMEI<br />( BTS Most Usage D+7)', ['act_usage_imei', 'ach_usage_imei']);
             $this->table->setCenterColumns(['program_name', 'cor', 'outlet_id']);
             $this->table->setRightColumns([            
@@ -69,6 +71,14 @@ class FreeSP3GBController extends Controller {
             $this->table->label(' ');
             $this->table->addTabContent('<p>Start Program : ' . $this->dateInfo($this->model_table, $this->connection) . '</p>');
             $this->table->addTabContent('<p>Update Date : ' . $this->startDateInfo($this->model_table, $this->connection) . '</p>');
+            $this->table->addTabContent('
+    			<br/>
+    			<p style="margin-bottom: 1px !important;"><i><b>Eligible Refund</b></i></p>
+    			<div style="background-color: #fbf2f2; margin: 0; padding: 10px; border: #fdd1d1 solid 1px; border-radius: 4px;">
+    				<p style="margin-bottom: 1px !important;"><i>Sub Cluster yang di-registrasi pada program FREE SP 3GB Cocktail to Sub Cluster Area</i></p>
+    				<p style="margin-bottom: 1px !important;"><i>MDN mempunyai usage terbanyak selama 7 hari di BTS Sub Cluster yang di-registrasi, serta memiliki NEW IMEI</i></p>
+    			</div>
+    		');
             $this->table->searchable(['period_string', 'region', 'cluster', 'distributor_name']);
             $this->table->clickable(false);
             $this->table->sortable();
@@ -79,6 +89,7 @@ class FreeSP3GBController extends Controller {
             $this->table->filterGroups('distributor_name', 'selectbox', true);
             
             $this->table->lists($this->model_table, $this->fields, false);
+            $this->table->closeTab();
         }
         
         return $this->render();
