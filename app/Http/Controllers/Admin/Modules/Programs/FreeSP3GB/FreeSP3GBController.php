@@ -27,8 +27,8 @@ class FreeSP3GBController extends Controller {
         'cluster',
         'sub_cluster',
         'target:Target Free SP',
-        'act_usage:ACT Usage',
-        'ach_target:Usage BTS Most<br />ACT Target',
+        'act_usage:Usage BTS Most<br />ACT Usage',
+	//	'ach_target:ACT Target',
         'act_usage_imei:ACT Usage IMEI',
         'ach_usage_imei:% Usage IMEI'
     ];
@@ -58,7 +58,7 @@ class FreeSP3GBController extends Controller {
             $this->table->setCenterColumns(['program_name', 'cor', 'outlet_id']);
             $this->table->setRightColumns([            
                 'act_usage',
-                'ach_target',
+			//	'ach_target',
                 'act_usage_imei',
                 'ach_usage_imei'
             ]);
