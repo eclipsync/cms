@@ -61,21 +61,22 @@ Route::group(['middleware' => ['web']], function() {
 			});
 			
 		    Route::group(['prefix' => 'programs'], function() {
-		        Route::resource('keren_pro',           'App\Http\Controllers\Admin\Modules\Programs\Keren\KerenProController',     ['as' => 'modules.programs']);		        
-		        Route::resource('keren_pro_data',      'App\Http\Controllers\Admin\Modules\Programs\Keren\KerenProDataController', ['as' => 'modules.programs']);
-		        Route::resource('merapi',              'App\Http\Controllers\Admin\Modules\Programs\Merapi\MerapiController',      ['as' => 'modules.programs']);
+		        Route::resource('keren_pro',           'App\Http\Controllers\Admin\Modules\Programs\Keren\KerenProController',      ['as' => 'modules.programs']);		        
+		        Route::resource('keren_pro_data',      'App\Http\Controllers\Admin\Modules\Programs\Keren\KerenProDataController',  ['as' => 'modules.programs']);
+		        Route::resource('merapi',              'App\Http\Controllers\Admin\Modules\Programs\Merapi\MerapiController',       ['as' => 'modules.programs']);
 		        
-		        Route::resource('fit',                 'App\Http\Controllers\Admin\Modules\Programs\Fit\FitController',            ['as' => 'modules.programs']);
-		        Route::resource('fit_pro',             'App\Http\Controllers\Admin\Modules\Programs\Fit\FitProController',         ['as' => 'modules.programs']);
-		        Route::resource('salesforce_canvaser', 'App\Http\Controllers\Admin\Modules\Programs\SalesforceCanvaserController', ['as' => 'modules.programs']);
+		        Route::resource('fit',                 'App\Http\Controllers\Admin\Modules\Programs\Fit\FitController',             ['as' => 'modules.programs']);
+		        Route::resource('fit_pro',             'App\Http\Controllers\Admin\Modules\Programs\Fit\FitProController',          ['as' => 'modules.programs']);
+		        Route::resource('freesp3gb',           'App\Http\Controllers\Admin\Modules\Programs\FreeSP3GB\FreeSP3GBController', ['as' => 'modules.programs']);
+		        Route::resource('salesforce_canvaser', 'App\Http\Controllers\Admin\Modules\Programs\SalesforceCanvaserController',  ['as' => 'modules.programs']);
 		        
-		        Route::resource('low_denom',           'App\Http\Controllers\Admin\Modules\Programs\LowDenomController',           ['as' => 'modules.programs']);
+		        Route::resource('low_denom',           'App\Http\Controllers\Admin\Modules\Programs\LowDenomController',            ['as' => 'modules.programs']);
 		    });
 		        
 	        Route::group(['prefix' => 'reports'], function() {
-	        	Route::resource('natuna_anambas',      'App\Http\Controllers\Admin\Modules\Reports\NatunaAnambasController',       ['as' => 'modules.reports']);
-	        	Route::resource('trikom_wireless',     'App\Http\Controllers\Admin\Modules\Reports\TrikomWirelessController',      ['as' => 'modules.reports']);
-	        	Route::resource('challange',           'App\Http\Controllers\Admin\Modules\Reports\ChallangeController',           ['as' => 'modules.reports']);
+	        	Route::resource('natuna_anambas',      'App\Http\Controllers\Admin\Modules\Reports\NatunaAnambasController',        ['as' => 'modules.reports']);
+	        	Route::resource('trikom_wireless',     'App\Http\Controllers\Admin\Modules\Reports\TrikomWirelessController',       ['as' => 'modules.reports']);
+	        	Route::resource('challange',           'App\Http\Controllers\Admin\Modules\Reports\ChallangeController',            ['as' => 'modules.reports']);
 	        });
 	        Route::group(['prefix' => 'kpi'], function() {
 	            Route::resource('distributors', 'App\Http\Controllers\Admin\Modules\Kpi\KpiDistributorsController', ['as' => 'modules.kpi']);

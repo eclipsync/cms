@@ -77,6 +77,8 @@ if ($errors->has('username')) {
 									<strong>{{ $errors->first('password') }}</strong>
 								</span>
 								@endif
+								
+								<!-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> -->
 							</div>
 							<script type="text/javascript">
 								function validateEmail(objMail) {

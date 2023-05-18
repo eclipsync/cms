@@ -16,10 +16,8 @@ use Incodiy\Codiy\Controllers\Core\Controller;
  * @email		wisnuwidi@gmail.com
  */
  
-class FormController extends Form {
+class FormController extends Controller {
 	use Handler;
-	
-	/*
 	
 	public  $data;
 	private $fieldSummary = [
@@ -50,6 +48,19 @@ class FormController extends Form {
 	}
 	
 	public function index() {
+	    $this->setPage();
+	    
+	    $this->chart->subtitle('Test');
+	    $this->chart->column('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
+	    $this->chart->line('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
+	    $this->chart->dualAxesLineAndColumn('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue', 'total_package_30k'], 'name:period|data:total_all_revenue::sum|combine:total_package_30k::sum::legend:true', 'region', 'period::DESC, region::DESC, total_all_revenue::DESC', 'region, period');
+	    $this->chart->bar('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
+	    $this->chart->area('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
+	    
+	    return $this->render();
+	}
+	
+	public function index1() {
 		$this->setPage('100 Days Challange');
 		$this->sessionFilters();
 		
@@ -111,7 +122,7 @@ class FormController extends Form {
 			'actual_subs_per_bts',
 			'actual_rev_per_bts'
 		]);
-		 *
+		 */
 		$this->table->label(' ');
 		$this->table->addTabContent('<p>As of: ' . $this->dateInfo($this->model_table, $this->connection) . '</p>');
 		$this->table->searchable(['period_string', 'cor']);
@@ -167,5 +178,5 @@ Highcharts.chart('container', {
     }
 });
 </script>";
-	}*/
+	}
 }
