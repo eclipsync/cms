@@ -11,15 +11,15 @@
  * @email		wisnuwidi@gmail.com, wisnuwidi@incodiy.com
  */
 
-$multiPlatform		       = false;
+$multiPlatform		      = false;
 
-$platform                = [];
-$platform['type']        = 'single';
-$platform['table']       = false;
-$platform['key']         = false;
-$platform['name']        = false;
-$platform['label']       = false;
-$platform['route']       = false;
+$platform                 = [];
+$platform['type']         = 'single';
+$platform['table']        = false;
+$platform['key']          = false;
+$platform['name']         = false;
+$platform['label']        = false;
+$platform['route']        = false;
 
 if (true === $multiPlatform) {
 	// You can be free to change this variable value
@@ -32,7 +32,7 @@ if (true === $multiPlatform) {
 }
 
 return [
-	'baseURL'             => 'http://localhost/eclipsync/.incodiy/dev/public',
+	'baseURL'             => 'http://localhost/incodiy/.dev/public',
 	'index_folder'        => 'public',
 	'template'            => 'default',
 	'base_template'       => 'assets/templates',
@@ -48,7 +48,7 @@ return [
 	// maintenance: if true, we can bypass with this code[login?as=username|email]
 	// this set config file used to make sure if set database maintenance status changed by others or hacked or crashed database
 	// so, the application will be read based on this file set.
-		
+	
 	// PLATFORM
 	'platform_type'       => $platform['type'],  // ['single', 'multiple']
 	'platform_table'      => $platform['table'], // if single = false
@@ -64,7 +64,7 @@ return [
 	'created_at'          => '2017 - ' . date('Y'),
 	'email'               => 'wisnuwidi@gmail.com',
 	'website'             => 'codiy.co.id',
-
+	
 	// Meta Tags
 	'meta_author'         => 'Wisnu Widiantoko',
 	'meta_title'          => 'CoDIY',
@@ -72,10 +72,10 @@ return [
 	'meta_description'    => 'CoDIY Application Website',
 	'meta_viewport'       => 'width=device-width, initial-scale=1.0, maximum-scale=1.0',
 	'meta_http_equiv'     => [
-		'type'             => 'X-UA-Compatible',
-		'content'          => 'IE=edge,chrome=1'
+		'type'            => 'X-UA-Compatible',
+		'content'         => 'IE=edge,chrome=1'
 	],
-		
+	
 	'user' => [
 		'alias_label'        => 'Group Location',
 		'alias_placeholder'  => ':filterName|value (separated by [,]colon)',
@@ -83,12 +83,12 @@ return [
 	],
 	
 	'log_activity'        => [
-		'run_status'       => 'unexceptions',
-		'exceptions'       => [
-			'controllers'   => [
+		'run_status'      => 'unexceptions',
+		'exceptions'      => [
+			'controllers' => [
 				App\Http\Controllers\Admin\System\LogController::class
 			],
-			'groups' => [
+			'groups'      => [
 				'admin'
 			]
 		]
