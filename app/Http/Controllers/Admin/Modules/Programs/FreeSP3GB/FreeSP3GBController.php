@@ -28,7 +28,6 @@ class FreeSP3GBController extends Controller {
         'sub_cluster',
         'target:Target Free SP',
         'act_usage:Usage BTS Most<br />ACT Usage',
-	//	'ach_target:ACT Target',
         'act_usage_imei:ACT Usage IMEI',
         'ach_usage_imei:% Usage IMEI'
     ];
@@ -56,11 +55,22 @@ class FreeSP3GBController extends Controller {
         if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
             
             $this->table->openTab('Summary');
+            
+            $this->chart->column($this->model_table, ['period', 'region', 'act_usage'], 'name:period|data:act_usage::sum', 'region', 'region::DESC', 'period, region');
+            
+            $this->chart->column (
+                $this->model_table, // source
+                ['region', 'act_usage', 'act_usage_imei', 'target'], // fieldset
+                'act_usage::sum,act_usage_imei::sum,target::sum',      // format
+                'region',       // category
+                'region::DESC', // order
+                'region'        // groups
+            );
+            
             $this->table->mergeColumns('Activation NEW IMEI<br />( BTS Most Usage D+7)', ['act_usage_imei', 'ach_usage_imei']);
             $this->table->setCenterColumns(['program_name', 'cor', 'outlet_id']);
             $this->table->setRightColumns([            
                 'act_usage',
-			//	'ach_target',
                 'act_usage_imei',
                 'ach_usage_imei'
             ]);
