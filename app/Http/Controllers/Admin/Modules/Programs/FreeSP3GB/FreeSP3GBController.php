@@ -62,9 +62,9 @@ class FreeSP3GBController extends Controller {
                 $this->model_table, // source
                 ['region', 'act_usage', 'act_usage_imei'], // fieldset
                 'act_usage::sum,act_usage_imei::sum',      // format
-                'region',       // category
-                'region::DESC', // order
-                'region'        // groups
+            	'region',       // category
+            	'region',       // groups
+                'region::DESC'  // order
             );
             
             $this->table->mergeColumns('Activation NEW IMEI<br />( BTS Most Usage D+7)', ['act_usage_imei', 'ach_usage_imei']);
