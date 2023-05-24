@@ -58,12 +58,21 @@ class FreeSP3GBController extends Controller {
 		//	$this->table->openTab('Summary');
 			$this->chart->column (
 				$this->model_table, // source
-				['region', 'act_usage', 'act_usage_imei'], // fieldset
-				'act_usage::sum,act_usage_imei::sum',	  // format
+				['region', 'act_usage', 'act_usage_imei', 'target'], // fieldset
+				'act_usage::sum,act_usage_imei::sum,target::sum',	  // format
 				'region',	   // category
 				'region',	   // groups
 				'region::DESC'  // order
 			);
+			/* 
+			$this->chart->line (
+				$this->model_table, // source
+				['region', 'act_usage', 'act_usage_imei', 'ach_usage_imei'], // fieldset
+				'act_usage::sum,act_usage_imei::sum,ach_usage_imei::sum',	  // format
+				'region',	   // category
+				'region',	   // groups
+				'region::DESC'  // order
+			); */
 			/* 
 			$this->chart->canvas('column', $this->model_table, ['period', 'region', 'act_usage'], 'name:period|data:act_usage::sum', 'region', 'period, region', 'region::DESC');
 			$this->chart->canvas (
