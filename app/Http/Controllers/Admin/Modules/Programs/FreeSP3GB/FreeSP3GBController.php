@@ -51,13 +51,21 @@ class FreeSP3GBController extends Controller {
 		$this->removeActionButtons(['add']);
 		
 		$this->table->connection($this->connection);
+		$this->chart->connection($this->connection);
 		
 		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
 			
-			$this->table->openTab('Summary');
-			
+		//	$this->table->openTab('Summary');
+			$this->chart->column (
+				$this->model_table, // source
+				['region', 'act_usage', 'act_usage_imei'], // fieldset
+				'act_usage::sum,act_usage_imei::sum',	  // format
+				'region',	   // category
+				'region',	   // groups
+				'region::DESC'  // order
+			);
+			/* 
 			$this->chart->canvas('column', $this->model_table, ['period', 'region', 'act_usage'], 'name:period|data:act_usage::sum', 'region', 'period, region', 'region::DESC');
-			
 			$this->chart->canvas (
 				'column',
 				$this->model_table, // source
@@ -67,7 +75,8 @@ class FreeSP3GBController extends Controller {
 				'region',	   // groups
 				'region::DESC'  // order
 			);
-			
+			 */
+			/* 
 			$this->table->mergeColumns('Activation NEW IMEI<br />( BTS Most Usage D+7)', ['act_usage_imei', 'ach_usage_imei']);
 			$this->table->setCenterColumns(['program_name', 'cor', 'outlet_id']);
 			$this->table->setRightColumns([			
@@ -100,7 +109,7 @@ class FreeSP3GBController extends Controller {
 			$this->table->filterGroups('distributor_name', 'selectbox', true);
 			
 			$this->table->lists($this->model_table, $this->fields, false);
-			$this->table->closeTab();
+			$this->table->closeTab(); */
 		}
 	//	dd($this->chart, $this->table);
 		return $this->render();
