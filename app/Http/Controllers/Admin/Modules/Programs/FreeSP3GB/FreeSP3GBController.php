@@ -56,23 +56,36 @@ class FreeSP3GBController extends Controller {
 		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
 			
 		//	$this->table->openTab('Summary');
+		//	$this->chart->title('Chart 1');
+		//	$this->chart->axisTitle('Axis Title');
 			$this->chart->column (
 				$this->model_table, // source
 				['region', 'act_usage', 'act_usage_imei', 'target'], // fieldset
-				'act_usage::sum,act_usage_imei::sum,target::sum',	  // format
+				'act_usage::sum,act_usage_imei::sum,target::round',	 // format
 				'region',	   // category
 				'region',	   // groups
-				'region::DESC'  // order
+				'region::DESC' // order
 			);
-			/* 
+			
+			$this->chart->title('Chart 2');
+			$this->chart->subtitle('Sub Chart 2');
 			$this->chart->line (
 				$this->model_table, // source
 				['region', 'act_usage', 'act_usage_imei', 'ach_usage_imei'], // fieldset
-				'act_usage::sum,act_usage_imei::sum,ach_usage_imei::sum',	  // format
+				'act_usage::sum,act_usage_imei::sum,ach_usage_imei::sum',	 // format
 				'region',	   // category
 				'region',	   // groups
-				'region::DESC'  // order
-			); */
+				'region::DESC' // order
+			);
+			
+			$this->chart->bar (
+				$this->model_table, // source
+				['region', 'act_usage', 'act_usage_imei'], // fieldset
+				'act_usage::sum,act_usage_imei::sum',	   // format
+				'region',	   // category
+				'region',	   // groups
+				'region::DESC' // order
+			);
 			/* 
 			$this->chart->canvas('column', $this->model_table, ['period', 'region', 'act_usage'], 'name:period|data:act_usage::sum', 'region', 'period, region', 'region::DESC');
 			$this->chart->canvas (
