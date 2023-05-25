@@ -56,8 +56,8 @@ class FreeSP3GBController extends Controller {
 		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
 			
 		//	$this->table->openTab('Summary');
-		//	$this->chart->title('Chart 1');
-		//	$this->chart->axisTitle('Axis Title');
+			$this->chart->title('Chart 1');
+			$this->chart->axisTitle('Axis Title');
 			$this->chart->column (
 				$this->model_table, // source
 				['region', 'act_usage', 'act_usage_imei', 'target'], // fieldset
