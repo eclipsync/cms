@@ -31,7 +31,41 @@ class FreeSP3GBController extends Controller {
 		'act_usage_imei:ACT Usage IMEI',
 		'ach_usage_imei:% Usage IMEI'
 	];
-	
+	/* 
+	private $fieldsets = [
+		'period_string',
+		'nama_program',
+		'cor:COR',
+		'region',
+		'cluster',
+		'sub_cluster',
+		'outlet_id',
+		'outlet_name:Nama Outlet',
+		'outlet_cabang_id:Outlet Cabang',
+		'outlet_cabang_name:Nama Outlet Cabang',
+		'program_class:Kelas Program',
+		
+		'target_revenue',
+		'total_inner_revenue_with_imei:Total Eligible Revenue',
+		'total_achivement:Achievement',
+		
+		'target_revenue_sp:Target Revenue SP',
+		'total_inner_sp_revenue_with_imei:Total Eligible SP Revenue With IMEI',
+		'sp_achievement:SP Achievement',
+		
+		'total_rgu_act:Total AGU ACT',
+		'total_inner_sp_30k:Total Revenue Inner SP 30K',
+		'total_all_revenue',
+		'total_inner_revenue',
+		'total_inner_sp:Total SP Inner',
+		'total_inner_vd:Total VD Inner',
+		'total_inner_paket_data',
+		'total_inner_eligible_imei',
+		'total_aktifasi',
+		'hari_berjalan',
+		'sisa_hari'
+	];
+	 */
 	public function __construct() {
 		parent::__construct(FreeSP3GB::class, 'modules.programs.freesp3gb');
 	}
@@ -54,6 +88,12 @@ class FreeSP3GBController extends Controller {
 		$this->chart->connection($this->connection);
 		
 		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
+			/* 
+			$this->table->openTab('Detail');
+			$this->table->label(' ');
+			$this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo('report_data_detail_program_keren_pro_national', $this->connection) . '</p>');
+			$this->table->lists('report_data_detail_program_keren_pro_national', $this->fieldsets, false);
+			 */
 			$this->table->openTab('Summary');
 			
 			$this->table->mergeColumns('Activation NEW IMEI<br />( BTS Most Usage D+7)', ['act_usage_imei', 'ach_usage_imei']);
@@ -88,20 +128,17 @@ class FreeSP3GBController extends Controller {
 			$this->table->filterGroups('distributor_name', 'selectbox', true);
 			
 			$this->table->lists($this->model_table, $this->fields, false);
-			$this->table->closeTab();
 			
-			$this->chart->title('Chart 1');
-			$this->chart->axisTitle('Axis Title');
-			$this->chart->syncWith($this->table);
-			
-			$this->chart->column (
-				$this->model_table, // source
+			$this->table->chart(
+				'column',
 				['region', 'act_usage', 'act_usage_imei', 'target'], // fieldset
 				'act_usage::sum,act_usage_imei::sum,target::round',	 // format
 				'region',	   // category
 				'region',	   // groups
 				'region::DESC' // order
 			);
+			
+			$this->table->closeTab();
 		}
 		
 		return $this->render();
