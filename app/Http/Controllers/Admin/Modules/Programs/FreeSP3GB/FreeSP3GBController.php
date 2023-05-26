@@ -58,6 +58,7 @@ class FreeSP3GBController extends Controller {
 		//	$this->table->openTab('Summary');
 			$this->chart->title('Chart 1');
 			$this->chart->axisTitle('Axis Title');
+			$this->chart->syncWith($this->table);
 			$this->chart->column (
 				$this->model_table, // source
 				['region', 'act_usage', 'act_usage_imei', 'target'], // fieldset
@@ -69,6 +70,7 @@ class FreeSP3GBController extends Controller {
 			
 			$this->chart->title('Chart 2');
 			$this->chart->subtitle('Sub Chart 2');
+			$this->chart->syncWith($this->table);
 			$this->chart->line (
 				$this->model_table, // source
 				['region', 'act_usage', 'act_usage_imei', 'ach_usage_imei'], // fieldset
@@ -78,6 +80,7 @@ class FreeSP3GBController extends Controller {
 				'region::DESC' // order
 			);
 			
+			$this->chart->syncWith($this->table);
 			$this->chart->bar (
 				$this->model_table, // source
 				['region', 'act_usage', 'act_usage_imei'], // fieldset
