@@ -137,7 +137,16 @@ class FreeSP3GBController extends Controller {
 				'region',	   // groups
 				'region::DESC' // order
 			);
-			
+			/* 
+			$this->table->chart(
+				'bar',
+				['region', 'act_usage', 'act_usage_imei', 'target'], // fieldset
+				'act_usage::sum,act_usage_imei::sum,target::round',	 // format
+				'region',	   // category
+				'region',	   // groups
+				'region::DESC' // order
+			);
+			 */
 			$this->table->closeTab();
 		}
 		
