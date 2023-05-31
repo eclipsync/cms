@@ -131,7 +131,7 @@ class FreeSP3GBController extends Controller {
 			
 			$this->table->chart(
 				'column',
-				['region', 'act_usage', 'act_usage_imei', 'target'], // fieldset
+				['region', 'act_usage', 'act_usage_imei', 'target::line'], // fieldset
 				'act_usage::sum,act_usage_imei::sum,target::round',	 // format
 				'region',	   // category
 				'region',	   // groups
