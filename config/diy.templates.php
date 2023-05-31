@@ -149,7 +149,8 @@ return [
 			'highcharts' => [
 				'js'  => [
 					'top:vendor/plugins/highcharts/js/highcharts.js',
-					'top:vendor/plugins/highcharts/js/modules/exporting.js'
+					'top:vendor/plugins/highcharts/js/modules/exporting.js',
+					'js/diycharts.js'
 				],
 				'css' => [null]
 			],
