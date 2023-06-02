@@ -48,16 +48,48 @@ class FormController extends Controller {
 	}
 	
 	public function index() {
-	    $this->setPage();
-	    
-	    $this->chart->subtitle('Test');
-	    $this->chart->column('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
-	    $this->chart->line('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
-	    $this->chart->dualAxesLineAndColumn('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue', 'total_package_30k'], 'name:period|data:total_all_revenue::sum|combine:total_package_30k::sum::legend:true', 'region', 'period::DESC, region::DESC, total_all_revenue::DESC', 'region, period');
-	    $this->chart->bar('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
-	    $this->chart->area('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
-	    
-	    return $this->render();
+		$this->setPage();
+		
+		$this->table->connection($this->connection);
+		$this->chart->connection($this->connection);
+		
+		$this->table->searchable(['period', 'region']);
+		$this->table->filterGroups('period', 'selectbox', true);
+		$this->table->filterGroups('region', 'selectbox', false);
+		$this->table->lists('report_data_chart_bar_with_negative_value', ['period', 'region', 'total_act', 'total_act_minus'], false);
+		
+		$this->table->chartOptions('title', 'Report Chart');
+		$this->table->chartOptions('subtitle', 'Test');
+		$this->table->chartOptions('detectNegativeValue', true);
+	//	$this->table->chartOptions('stack', false);
+		$this->table->chart(
+			'column',
+			['period', 'region', 'total_act', 'total_act_minus'],
+			'name:period|total_act::sum|total_act_minus::sum',
+			'region',
+			'region, period',
+			'region::DESC'
+		);
+		
+		/* 
+		$this->chart->subtitle('Test');
+		$this->chart->detectNegativeValue();
+		$this->chart->bar(
+			'report_data_chart_bar_with_negative_value', 
+			['period', 'region', 'total_act', 'total_act_minus'], 
+			'name:period|total_act::sum|total_act_minus::sum', 
+			'region', 
+			'region, period', 
+			'region::DESC'
+		);
+		 */
+		/* 
+		$this->chart->line('report_data_chart_bar_with_negative_value', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
+	 //   $this->chart->dualAxesLineAndColumn('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue', 'total_package_30k'], 'name:period|data:total_all_revenue::sum|combine:total_package_30k::sum::legend:true', 'region', 'period::DESC, region::DESC, total_all_revenue::DESC', 'region, period');
+		$this->chart->bar('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
+		$this->chart->area('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_all_revenue'], 'name:period|data:total_all_revenue::sum', 'region', 'region::DESC, total_all_revenue::DESC', 'region, period');
+		 */
+		return $this->render();
 	}
 	
 	public function index1() {
@@ -148,34 +180,34 @@ class FormController extends Controller {
 <div id=\"container\"></div>
 <script>
 Highcharts.chart('container', {
-    data: {
-        table: '{$this->table->tableID[$this->table->tableName]}'
-    },
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Live births in Norway'
-    },
-    subtitle: {
-        text:
-            'Source: <a href=\"https://www.ssb.no/en/statbank/table/04231\" target=\"_blank\">SSB</a>'
-    },
-    xAxis: {
-        type: 'category'
-    },
-    yAxis: {
-        allowDecimals: false,
-        title: {
-            text: 'Amount'
-        }
-    },
-    tooltip: {
-        formatter: function () {
-            return '<b>' + this.series.name + '</b><br/>' +
-                this.point.y + ' ' + this.point.name.toLowerCase();
-        }
-    }
+	data: {
+		table: '{$this->table->tableID[$this->table->tableName]}'
+	},
+	chart: {
+		type: 'column'
+	},
+	title: {
+		text: 'Live births in Norway'
+	},
+	subtitle: {
+		text:
+			'Source: <a href=\"https://www.ssb.no/en/statbank/table/04231\" target=\"_blank\">SSB</a>'
+	},
+	xAxis: {
+		type: 'category'
+	},
+	yAxis: {
+		allowDecimals: false,
+		title: {
+			text: 'Amount'
+		}
+	},
+	tooltip: {
+		formatter: function () {
+			return '<b>' + this.series.name + '</b><br/>' +
+				this.point.y + ' ' + this.point.name.toLowerCase();
+		}
+	}
 });
 </script>";
 	}
