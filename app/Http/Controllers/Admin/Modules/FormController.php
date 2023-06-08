@@ -71,6 +71,25 @@ class FormController extends Controller {
 			'region::DESC'
 		);
 		
+		
+		
+		$this->table->searchable(['period', 'region']);
+		$this->table->filterGroups('period', 'selectbox', true);
+		$this->table->filterGroups('region', 'selectbox', false);
+		$this->table->lists('report_data_monthly_program_keren', ['period', 'region', 'total_all_revenue', 'total_sp_new_imei_revenue'], false);
+		
+		$this->table->chartOptions('title', 'Report Chart');
+		$this->table->chartOptions('subtitle', 'Test');
+		$this->table->chartOptions('detectNegativeValue', true);
+	//	$this->table->chartOptions('stack', false);
+		$this->table->chart(
+			'column',
+			['region', 'total_all_revenue', 'total_sp_new_imei_revenue'],
+			'region|total_all_revenue::sum|total_sp_new_imei_revenue::sum',
+			'region',
+			'region',
+			'region::DESC'
+		);
 		/* 
 		$this->chart->subtitle('Test');
 		$this->chart->detectNegativeValue();
