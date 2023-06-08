@@ -52,7 +52,7 @@ class FormController extends Controller {
 		
 		$this->table->connection($this->connection);
 		$this->chart->connection($this->connection);
-		
+		/* 
 		$this->table->searchable(['period', 'region']);
 		$this->table->filterGroups('period', 'selectbox', true);
 		$this->table->filterGroups('region', 'selectbox', false);
@@ -68,6 +68,21 @@ class FormController extends Controller {
 			'name:period|total_act::sum|total_act_minus::sum',
 			'region',
 			'region, period',
+			'region::DESC'
+		);
+		 */
+		
+		$this->table->searchable(['period', 'region']);
+		$this->table->filterGroups('period', 'selectbox', true);
+		$this->table->filterGroups('region', 'selectbox', false);
+		$this->table->lists('report_data_monthly_program_keren_pro_data', ['period', 'region', 'total_vd_30k', 'total_eligible_revenue', 'total_eligible_vd_30k', 'total_package_30k'], false);
+		$this->table->chartOptions('stack', 'percent');
+		$this->table->chart(
+			'area',
+			['period', 'region', 'total_vd_30k', 'total_eligible_revenue', 'total_eligible_vd_30k', 'total_package_30k'],
+			'name:period|total_vd_30k::sum|total_eligible_revenue::sum|total_eligible_vd_30k::sum|total_package_30k::sum',
+			'region',
+			'region',
 			'region::DESC'
 		);
 		
