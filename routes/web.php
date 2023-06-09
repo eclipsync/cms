@@ -52,6 +52,11 @@ Route::group(['middleware' => ['web']], function() {
 				Route::resource('user',       'App\Http\Controllers\Admin\System\UserController',           ['as' => 'system.accounts']);
 				Route::resource('import_csv', 'App\Http\Controllers\Admin\System\ImportAccountsController', ['as' => 'system.accounts']);
 			});
+				
+			// MANAGEMENTS
+			Route::group(['prefix' => 'managements'], function() {
+				Route::resource('user_activity', 'App\Http\Controllers\Admin\System\UserActivityController', ['as' => 'system.managements']);
+			});
 		});
 
 		Route::group(['prefix' => 'modules'], function() {
