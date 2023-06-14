@@ -56,6 +56,8 @@ Route::group(['middleware' => ['web']], function() {
 			// MANAGEMENTS
 			Route::group(['prefix' => 'managements'], function() {
 				Route::resource('user_activity', 'App\Http\Controllers\Admin\System\UserActivityController', ['as' => 'system.managements']);
+			//	Route::post('user_activity/manage/{user_activity}', 'App\Http\Controllers\Admin\System\UserActivityController@manage');
+				Route::post('user_activity/manage', ['uses' => 'App\Http\Controllers\Admin\System\UserActivityController@manage', 'as' => 'system.managements.user_activity.manage']);
 			});
 		});
 
@@ -93,7 +95,7 @@ Route::group(['middleware' => ['web']], function() {
 		});
 
 		Route::group(['prefix' => 'ajax'], function() {
-			Route::post('post',   ['uses' => 'App\Http\Controllers\Admin\System\AjaxController@post',   'as' => 'ajax.post']);			
+			Route::post('post',   ['uses' => 'App\Http\Controllers\Admin\System\AjaxController@post',   'as' => 'ajax.post']);
 			Route::post('export', ['uses' => 'App\Http\Controllers\Admin\System\AjaxController@export', 'as' => 'ajax.export']);
 		});
 	});
