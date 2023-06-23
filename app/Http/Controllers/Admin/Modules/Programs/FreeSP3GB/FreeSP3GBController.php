@@ -23,49 +23,18 @@ class FreeSP3GBController extends Controller {
 	
 	private $fields = [
 		'distributor_name',
+		'class_program',
 		'region',
 		'cluster',
 		'sub_cluster',
-		'target:Target Free SP',
-		'act_usage:Usage BTS Most<br />ACT Usage',
+		'target:Target Batch 1',
+		'act_usage:Usage BTS First<br />ACT Usage',
+		'ach_target:ACH Target',
 		'act_usage_imei:ACT Usage IMEI',
-		'ach_usage_imei:% Usage IMEI'
+		'ach_usage_imei:% Usage IMEI',
+		'target_batch2:Target Batch 2'
 	];
-	/* 
-	private $fieldsets = [
-		'period_string',
-		'nama_program',
-		'cor:COR',
-		'region',
-		'cluster',
-		'sub_cluster',
-		'outlet_id',
-		'outlet_name:Nama Outlet',
-		'outlet_cabang_id:Outlet Cabang',
-		'outlet_cabang_name:Nama Outlet Cabang',
-		'program_class:Kelas Program',
-		
-		'target_revenue',
-		'total_inner_revenue_with_imei:Total Eligible Revenue',
-		'total_achivement:Achievement',
-		
-		'target_revenue_sp:Target Revenue SP',
-		'total_inner_sp_revenue_with_imei:Total Eligible SP Revenue With IMEI',
-		'sp_achievement:SP Achievement',
-		
-		'total_rgu_act:Total AGU ACT',
-		'total_inner_sp_30k:Total Revenue Inner SP 30K',
-		'total_all_revenue',
-		'total_inner_revenue',
-		'total_inner_sp:Total SP Inner',
-		'total_inner_vd:Total VD Inner',
-		'total_inner_paket_data',
-		'total_inner_eligible_imei',
-		'total_aktifasi',
-		'hari_berjalan',
-		'sisa_hari'
-	];
-	 */
+	
 	public function __construct() {
 		parent::__construct(FreeSP3GB::class, 'modules.programs.freesp3gb');
 	}
@@ -85,70 +54,60 @@ class FreeSP3GBController extends Controller {
 		$this->removeActionButtons(['add']);
 		
 		$this->table->connection($this->connection);
-		$this->chart->connection($this->connection);
 		
-		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
+	//	if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
 			/* 
-			$this->table->openTab('Detail');
-			$this->table->label(' ');
-			$this->table->addTabContent('<p>Tanggal Update Terakhir : ' . $this->dateInfo('report_data_detail_program_keren_pro_national', $this->connection) . '</p>');
-			$this->table->lists('report_data_detail_program_keren_pro_national', $this->fieldsets, false);
-			 */
 			$this->table->openTab('Summary');
-			
-			$this->table->mergeColumns('Activation NEW IMEI<br />( BTS Most Usage D+7)', ['act_usage_imei', 'ach_usage_imei']);
+			$this->table->mergeColumns('Activation NEW IMEI<br />( BTS First Usage D+7)', ['act_usage_imei', 'ach_usage_imei']);
 			$this->table->setCenterColumns(['program_name', 'cor', 'outlet_id']);
-			$this->table->setRightColumns([			
+			$this->table->setRightColumns([
 				'act_usage',
+				'ach_target',
 				'act_usage_imei',
-				'ach_usage_imei'
+				'ach_usage_imei',
+				'target_batch2'
 			]);
 			$this->table->format('ach_target', 2);
 			$this->table->format('ach_usage_imei', 2);
+			$this->table->columnCondition('ach_target', 'cell', '>=', 1, 'suffix', ' %');
 			$this->table->columnCondition('ach_usage_imei', 'cell', '>=', 1, 'suffix', ' %');
 			
 			$this->table->label(' ');
 			$this->table->addTabContent('<p>Start Program : ' . $this->dateInfo($this->model_table, $this->connection) . '</p>');
 			$this->table->addTabContent('<p>Update Date : ' . $this->startDateInfo($this->model_table, $this->connection) . '</p>');
 			$this->table->addTabContent('
-				<br/>
-				<p style="margin-bottom: 1px !important;"><i><b>Eligible Refund</b></i></p>
-				<div style="background-color: #fbf2f2; margin: 0; padding: 10px; border: #fdd1d1 solid 1px; border-radius: 4px;">
-					<p style="margin-bottom: 1px !important;"><i>Sub Cluster yang di-registrasi pada program FREE SP 3GB Cocktail to Sub Cluster Area</i></p>
-					<p style="margin-bottom: 1px !important;"><i>MDN mempunyai usage terbanyak selama 7 hari di BTS Sub Cluster yang di-registrasi, serta memiliki NEW IMEI</i></p>
-				</div>
-			');
-			$this->table->searchable(['period_string', 'region', 'cluster', 'distributor_name']);
+    			<br/>
+    			<p style="margin-bottom: 1px !important;"><i><b>Eligible Refund</b></i></p>
+    			<div style="background-color: #fbf2f2; margin: 0; padding: 10px; border: #fdd1d1 solid 1px; border-radius: 4px;">
+    				<p style="margin-bottom: 1px !important;"><i>Sub Cluster yang di-registrasi pada program FREE SP 3GB Cocktail to Sub Cluster Area</i></p>
+    				<p style="margin-bottom: 1px !important;"><i>MDN mempunyai usage terbanyak selama 7 hari di BTS Sub Cluster yang di-registrasi, serta memiliki NEW IMEI</i></p>
+					<p style="margin-bottom: 1px !important;"><i>Report ini menggunakan data first usage 25MB, untuk data most usage masih dalam tahap UAT</i></p>
+    			</div>
+    		');
+			$this->table->searchable(['update_date_string', 'region', 'cluster', 'distributor_name']);
 			$this->table->clickable(false);
 			$this->table->sortable();
 			
-			$this->table->filterGroups('period_string', 'selectbox', true);
+			$this->table->filterGroups('update_date_string', 'selectbox', true);
 			$this->table->filterGroups('region', 'selectbox', true);
 			$this->table->filterGroups('cluster', 'selectbox', true);
 			$this->table->filterGroups('distributor_name', 'selectbox', true);
-			
+			 */
 			$this->table->lists($this->model_table, $this->fields, false);
 			
-			$this->table->chart(
+		//	if (in_array($this->session['user_group'], array_merge(['root'])) ) {
+		/* 	$this->table->chart(
 				'column',
-				['region', 'act_usage', 'act_usage_imei', 'target::line'], // fieldset
-				'act_usage::sum,act_usage_imei::sum,target::round',	 // format
-				'region',	   // category
-				'region',	   // groups
-				'region::DESC' // order
-			);
-			/* 
-			$this->table->chart(
-				'bar',
-				['region', 'act_usage', 'act_usage_imei', 'target'], // fieldset
-				'act_usage::sum,act_usage_imei::sum,target::round',	 // format
+				['region', 'act_usage', 'act_usage_imei'], // fieldset
+				'act_usage::sum,act_usage_imei::sum',	 // format
 				'region',	   // category
 				'region',	   // groups
 				'region::DESC' // order
 			); */
+		//	}
 			
-			$this->table->closeTab();
-		}
+		//	$this->table->closeTab();
+	//	}
 		
 		return $this->render();
 	}
