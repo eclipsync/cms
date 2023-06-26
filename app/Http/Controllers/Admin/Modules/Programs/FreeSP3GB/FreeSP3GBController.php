@@ -55,8 +55,8 @@ class FreeSP3GBController extends Controller {
 		
 		$this->table->connection($this->connection);
 		
-	//	if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
-			/* 
+		if (in_array($this->session['user_group'], array_merge(['root', $this->roleAlias])) || 'outlet' !== strtolower($this->session['group_info'])) {
+			
 			$this->table->openTab('Summary');
 			$this->table->mergeColumns('Activation NEW IMEI<br />( BTS First Usage D+7)', ['act_usage_imei', 'ach_usage_imei']);
 			$this->table->setCenterColumns(['program_name', 'cor', 'outlet_id']);
@@ -92,71 +92,23 @@ class FreeSP3GBController extends Controller {
 			$this->table->filterGroups('region', 'selectbox', true);
 			$this->table->filterGroups('cluster', 'selectbox', true);
 			$this->table->filterGroups('distributor_name', 'selectbox', true);
-			 */
+			
 			$this->table->lists($this->model_table, $this->fields, false);
 			
-		//	if (in_array($this->session['user_group'], array_merge(['root'])) ) {
-		/* 	$this->table->chart(
+			//	if (in_array($this->session['user_group'], array_merge(['root'])) ) {
+			$this->table->chart(
 				'column',
 				['region', 'act_usage', 'act_usage_imei'], // fieldset
-				'act_usage::sum,act_usage_imei::sum',	 // format
+				'act_usage::sum,act_usage_imei::sum',	   // format
 				'region',	   // category
 				'region',	   // groups
 				'region::DESC' // order
-			); */
-		//	}
+			);
+			//	}
 			
-		//	$this->table->closeTab();
-	//	}
+			$this->table->closeTab();
+		}
 		
 		return $this->render();
-	}
-	
-	private function chart() {
-		/* 
-		$this->chart->title('Chart 1');
-		$this->chart->axisTitle('Axis Title');
-		$this->chart->syncWith($this->table);
-		$this->chart->column (
-			$this->model_table, // source
-			['region', 'act_usage', 'act_usage_imei', 'target'], // fieldset
-			'act_usage::sum,act_usage_imei::sum,target::round',	 // format
-			'region',	   // category
-			'region',	   // groups
-			'region::DESC' // order
-		); */
-		/* 
-		$this->chart->title('Chart 2');
-		$this->chart->subtitle('Sub Chart 2');
-		$this->chart->syncWith($this->table);
-		$this->chart->line (
-			$this->model_table, // source
-			['region', 'act_usage', 'act_usage_imei', 'ach_usage_imei'], // fieldset
-			'act_usage::sum,act_usage_imei::sum,ach_usage_imei::sum',	 // format
-			'region',	   // category
-			'region',	   // groups
-			'region::DESC' // order
-		);
-		
-		$this->chart->syncWith($this->table);
-		$this->chart->bar (
-			$this->model_table, // source
-			['region', 'act_usage', 'act_usage_imei'], // fieldset
-			'act_usage::sum,act_usage_imei::sum',	   // format
-			'region',	   // category
-			'region',	   // groups
-			'region::DESC' // order
-		);
-		
-		$this->chart->canvas('column', $this->model_table, ['period', 'region', 'act_usage'], 'name:period|data:act_usage::sum', 'region', 'period, region', 'region::DESC');
-		$this->chart->canvas (
-			'column',
-			$this->model_table, // source
-			['region', 'act_usage', 'act_usage_imei'], // fieldset
-			'act_usage::sum,act_usage_imei::sum',	  // format
-			'region',	   // category
-			'region',	   // groups
-			'region::DESC'  // order
-		); */
 	}
 }

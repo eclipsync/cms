@@ -32,7 +32,7 @@ if (true === $multiPlatform) {
 }
 
 return [
-	'baseURL'             => 'http://localhost/eclipsync/.incodiy/dev/public',
+	'baseURL'             => 'http://localhost/incodiy/.dev/public',
 	'index_folder'        => 'public',
 	'template'            => 'default',
 	'base_template'       => 'assets/templates',
@@ -77,6 +77,9 @@ return [
 	],
 	
 	'user' => [
+		'group_alias_key'    => 'region',
+		'group_alias_field'  => 'group_alias',
+		
 		'alias_label'        => 'Group Location',
 		'alias_placeholder'  => ':filterName|value (separated by [,]colon)',
 		'alias_session_name' => 'user_locations'
