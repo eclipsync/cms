@@ -78,6 +78,7 @@ Route::group(['middleware' => ['web']], function() {
 		        Route::resource('salesforce_canvaser', 'App\Http\Controllers\Admin\Modules\Programs\SalesforceCanvaserController',  ['as' => 'modules.programs']);
 		        
 		        Route::resource('low_denom',           'App\Http\Controllers\Admin\Modules\Programs\LowDenomController',            ['as' => 'modules.programs']);
+		        Route::resource('samba',               'App\Http\Controllers\Admin\Modules\Programs\Samba\SambaController',         ['as' => 'modules.programs']);
 		    });
 		        
 	        Route::group(['prefix' => 'reports'], function() {
