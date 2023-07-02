@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Modules;
 use Incodiy\Codiy\Controllers\Admin\Modules\FormController as Form;
 use App\Models\Admin\Modules\Reports\Challange;
 use Incodiy\Codiy\Controllers\Core\Controller;
+#use Incodiy\Codiy\Controllers\Core\Craft\Email;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Created on 23 Mar 2021
@@ -48,6 +50,27 @@ class FormController extends Controller {
 	}
 	
 	public function index() {
+		$this->setPage();
+		$mailData = [
+			'subject' => 'Mantra Information Mail Programs',
+			'title' => 'Emails Testing For IncoDIY Development Project',
+			'body' => 'This is for testing email using smtp.'
+		];/* 
+		$email = new Email($mailData);
+		Mail::to(['wisnu.widiantoko@smartfren.com','wisnuwidi@gmail.com'])->send($email);
+		
+		dd("Email is sent successfully."); */
+		$this->email->title('Mantra Testing Title CC and BCC');
+		$this->email->message('Email Test Message');
+		$this->email->to(['wisnu.widiantoko@smartfren.com','wisnuwidi@gmail.com']);
+		$this->email->cc('wisnuwidi@gmail.com');
+		$this->email->bcc('wisnu.widiantoko@smartfren.com');
+		$this->email->send();
+		
+		return $this->render();
+	}
+	
+	public function indexx() {
 		$this->setPage();
 		
 		$this->table->connection($this->connection);
