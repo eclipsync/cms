@@ -10,7 +10,7 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "incodiy/codiy": "dev-main"
+        "incodiy/codiy": "dev-master"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -23,7 +23,7 @@
     },
     "repositories" : [{
         "type"      : "path",
-        "url"       : "D:/worksites/eclipsync/.incodiy/package/codiy",
+        "url"       : "D:/worksites/incodiy/.plugins/codiy",
         "options"   : {
             "symlink": true
         }

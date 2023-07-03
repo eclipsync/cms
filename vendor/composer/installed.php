@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '6b7e458b103427939ea9f0c27a9999d3ff517311',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -392,9 +392,9 @@
             ),
         ),
         'incodiy/codiy' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '438f4061393f745825064512c07e9ba178295d10',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '6e53dd0277c0678ee3a4267237df2a8a2cf06a1b',
             'type' => 'project',
             'install_path' => __DIR__ . '/../incodiy/codiy',
             'aliases' => array(),
@@ -434,9 +434,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '6b7e458b103427939ea9f0c27a9999d3ff517311',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -593,9 +593,9 @@
             'dev_requirement' => true,
         ),
         'nesbot/carbon' => array(
-            'pretty_version' => '2.67.0',
-            'version' => '2.67.0.0',
-            'reference' => 'c1001b3bc75039b07f38a79db5237c4c529e04c8',
+            'pretty_version' => '2.68.1',
+            'version' => '2.68.1.0',
+            'reference' => '4f991ed2a403c85efbc4f23eb4030063fdbe01da',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nesbot/carbon',
             'aliases' => array(),
@@ -823,8 +823,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(

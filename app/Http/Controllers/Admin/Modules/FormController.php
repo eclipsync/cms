@@ -51,15 +51,18 @@ class FormController extends Controller {
 	
 	public function index() {
 		$this->setPage();
+		/*
 		$mailData = [
 			'subject' => 'Mantra Information Mail Programs',
 			'title' => 'Emails Testing For IncoDIY Development Project',
 			'body' => 'This is for testing email using smtp.'
-		];/* 
+		]; 
 		$email = new Email($mailData);
 		Mail::to(['wisnu.widiantoko@smartfren.com','wisnuwidi@gmail.com'])->send($email);
 		
-		dd("Email is sent successfully."); */
+		dd("Email is sent successfully.");
+		*/
+		$this->email->subject('Test Subject');
 		$this->email->title('Mantra Testing Title CC and BCC');
 		$this->email->message('Email Test Message');
 		$this->email->to(['wisnu.widiantoko@smartfren.com','wisnuwidi@gmail.com']);
