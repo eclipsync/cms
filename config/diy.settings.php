@@ -95,5 +95,12 @@ return [
 				'admin'
 			]
 		]
+	],
+		
+	'email' => [
+		'from' => [
+			'address' => env('MAIL_FROM_ADDRESS', 'wisnuwidi@gmail.com'),
+			'name'    => env('MAIL_FROM_NAME', 'IncoDIY')
+		],
 	]
 ];
