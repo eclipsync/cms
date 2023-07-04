@@ -32,7 +32,7 @@ if (true === $multiPlatform) {
 }
 
 return [
-	'baseURL'             => 'http://localhost/incodiy/.dev/public',
+	'baseURL'             => 'http://localhost/eclipsync/.incodiy/dev/public',
 	'index_folder'        => 'public',
 	'template'            => 'default',
 	'base_template'       => 'assets/templates',
@@ -63,7 +63,7 @@ return [
 	'location_abbr'       => 'ID',
 	'created_at'          => '2017 - ' . date('Y'),
 	'email'               => 'wisnuwidi@gmail.com',
-	'website'             => 'codiy.co.id',
+	'website'             => 'incodiy.com',
 	
 	// Meta Tags
 	'meta_author'         => 'Wisnu Widiantoko',
@@ -96,11 +96,28 @@ return [
 			]
 		]
 	],
-		
+	
 	'email' => [
 		'from' => [
-			'address' => env('MAIL_FROM_ADDRESS', 'wisnuwidi@gmail.com'),
+			'address' => env('MAIL_FROM_ADDRESS', 'wisnuwidi@incodiy.com'),
 			'name'    => env('MAIL_FROM_NAME', 'IncoDIY')
 		],
+		'cc' => [
+			'address' => 'wisnu.widiantoko@smartfren.com',
+			'name'    => 'Wisnu Widiantoko'
+		],
+		'feet' => [
+			'text'      => 'Best Regards',
+			'signature' => 'wisnuwidi'
+		]
+	],
+		
+	'role' => [
+		'group' => [
+			'formatIdentity' => [
+				'view' => 'group_info|group_alias',
+				'separator' => ', '
+			]
+		]
 	]
 ];
