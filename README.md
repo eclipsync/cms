@@ -1,4 +1,4 @@
-Mantra Smartfren [ 2015 - Now ]
+Mantra Smartfren - Management reporting analisys [ 2015 - Now ]
 
 Mantra is sales reporting for commercial report dashboard.
 - 2015 Bu Happy and Rohmat create ETL database reports for collecting all requests from Pak Tom via DWH.
