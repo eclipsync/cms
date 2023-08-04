@@ -3,6 +3,10 @@
 	src: url('fonts/Congenial Black.ttf');
 }
 
+body {
+	font-size: 0.68rem !important;
+}
+
 body.login-container {
 	width: 100%;
 	height: 100%;
@@ -31,6 +35,14 @@ body.login-container > form.login-form > div.box-form {
 	right: 3%;
 	bottom: 3%;
 	text-align: center;
+}
+
+.custom-control.custom-switch {
+	height: 30px;
+}
+
+.custom-control.custom-switch > .custom-control-label:hover {
+	cursor: pointer;
 }
 
 .CodeMirror {

@@ -17,7 +17,7 @@ if (file_exists(LOG_FILE)) {
 	$log = unserialize(file_get_contents(LOG_FILE));
 
 	if (empty($log)) {
-		$log =[];
+		$log = [];
 	}
 
 	if (isset($log[$_SERVER['REMOTE_ADDR']]) && $log[$_SERVER['REMOTE_ADDR']]['num'] > $faultAttempt && time() - $log[$_SERVER['REMOTE_ADDR']]['time'] < 86400) {
@@ -42,17 +42,22 @@ session_name($nodeString);
 session_start();
 
 if (empty(PASSWORD) === false && (isset($_SESSION[$nodeString . '_admin'], $_SESSION[$nodeString . '_password']) === false || $_SESSION[$nodeString . '_admin'] !== true || $_SESSION[$nodeString . '_password'] != PASSWORD)) {
+
+
 	if (isset($_POST[$nodeString . '_password']) && empty($_POST[$nodeString . '_password']) === false) {
 		$password_hash = hash('sha512', $_POST[$nodeString . '_password']);
 
 		if ($password_hash === PASSWORD) {
+
 			session_regenerate_id(true);
 
 			$_SESSION[$nodeString . '_admin'] = true;
 			$_SESSION[$nodeString . '_password'] = $password_hash;
 
 			redirect();
+
 		} else {
+
 			$error = 'The entry password is not correct.';
 			$log = file_exists(LOG_FILE) ? unserialize(file_get_contents(LOG_FILE)) : array ();
 
@@ -69,6 +74,8 @@ if (empty(PASSWORD) === false && (isset($_SESSION[$nodeString . '_admin'], $_SES
 			file_put_contents(LOG_FILE, serialize($log));
 		}
 	} else if (isset($_POST['action'])) {
+
+
 		header('HTTP/1.0 403 Forbidden');
 		die('Your session has expired.');
 	}
@@ -78,6 +85,7 @@ if (empty(PASSWORD) === false && (isset($_SESSION[$nodeString . '_admin'], $_SES
 		$inFocus = '<script type="text/javascript">document.getElementById("' . $nodeString . '_password").focus();</script>';
 	}
 	$placeholder = 'Password';
+
 	die('<html>
 <head>
 	<meta charset="UTF-8" />
@@ -130,7 +138,7 @@ if (isset($_GET['path'])) {
 	}
 
 	$files = array_slice(scandir($dir), 2);
-	$list =[];
+	$list = [];
 
 	asort($files);
 
@@ -148,7 +156,7 @@ if (isset($_GET['path'])) {
 				'/'
 			], $dir . DS . $file . DS);
 
-			$list[] =[ 
+			$list[] = [ 
 				'text' => $file,
 				'icon' => 'far fa-folder',
 				'children' => true,
@@ -169,7 +177,7 @@ if (isset($_GET['path'])) {
 				'/'
 			], $dir . DS . $file);
 
-			$list[] =[ 
+			$list[] = [ 
 				'text' => $file,
 				'icon' => 'far fa-file',
 				'a_attr' => [ 
@@ -554,13 +562,13 @@ function file_to_history($file) {
 		copy($file, $file_history_dir . DS . $file_name . '.' . count($history_files));
 	}
 }
-function json_error($message, $params =[]) {
+function json_error($message, $params = []) {
 	return json_encode(array_merge([ 
 		'error' => true,
 		'message' => $message,
 	], $params), JSON_UNESCAPED_UNICODE);
 }
-function json_success($message, $params =[]) {
+function json_success($message, $params = []) {
 	return json_encode(array_merge([ 
 		'error' => false,
 		'message' => $message,
@@ -733,7 +741,7 @@ $_SESSION[$nodeString . '_token'] = bin2hex(random_bytes(32));
 				var path = $("#path").html();
 
 				if (path.length > 0) {
-					var name = prompt("Please enter file name:", "New File.php"),
+					var name = prompt("Please enter file name:", "NewFile.php"),
 						end = path.substring(path.length - 1),
 						file = "";
 
@@ -770,7 +778,7 @@ $_SESSION[$nodeString . '_token'] = bin2hex(random_bytes(32));
 				var path = $("#path").html();
 
 				if (path.length > 0) {
-					var name = prompt("Please enter directory name:", "New Folder"),
+					var name = prompt("Please enter directory name:", "NewFolder"),
 						end = path.substring(path.length - 1),
 						dir = "";
 
@@ -1137,7 +1145,7 @@ $_SESSION[$nodeString . '_token'] = bin2hex(random_bytes(32));
 						var terminal_commands = $.parseJSON(getCookie("terminal_commands"));
 
 						if (terminal_commands === false) {
-							terminal_commands =[];
+							terminal_commands = [];
 						}
 
 						terminal_commands.push(_val);
@@ -1381,12 +1389,12 @@ $_SESSION[$nodeString . '_token'] = bin2hex(random_bytes(32));
 			</div>
 		</div>
 		<div class="row px-3">
-			<div class="col-lg-3 col-md-3 col-sm-12 col-12">
+			<div class="col-lg-2 col-md-2 col-sm-12 col-12">
 				<div id="files" class="card">
 					<div class="card-block"></div>
 				</div>
 			</div>
-			<div class="col-lg-9 col-md-9 col-sm-12 col-12">
+			<div class="col-lg-10 col-md-10 col-sm-12 col-12">
 				<div class="card">
 					<div class="card-block">
 						<div id="loading">
