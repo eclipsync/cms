@@ -45,6 +45,7 @@ Route::group(['middleware' => ['web']], function() {
 			//	Route::resource('icon',       'App\Http\Controllers\Admin\System\IconController',        ['as' => 'system.config']);
 				Route::resource('log',        'App\Http\Controllers\Admin\System\LogController',         ['as' => 'system.config']);
 				Route::resource('etl',        'App\Http\Controllers\Admin\System\ExtransloadController', ['as' => 'system.config']);
+				Route::resource('run',        'App\Http\Controllers\Admin\System\RunController',         ['as' => 'system.config']);
 			});
 
 			// ACCOUNTS
