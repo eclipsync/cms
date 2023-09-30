@@ -8,4 +8,4 @@ Mantra [ Management Reporting Analisys ] is Sales Reporting Tool for Smartfren C
 - Last 2017, Mantra first lounching with brand new CMS-Code called Incodiy (June 2015 - Now still in development progress) but Mantra development still in progress.
 - In 2018, Mantra was re-develop again to provide some dashboard reports for some outlet programs and distributors with Wordpress.
 - In Aug 2022, I finish development process for Laravel Mantra with Incodiy, so this website re-develop again with my latest declarative code with laravel called Incodiy until Aug 2023 to provide some outlet programs and distributors report dashboard.
-- Now [Mantra](https://mantra.smartfren.com) was shut down and the last result was cloned in my own [website](https://smartfren.incodiy.com)
+- Now [Mantra](https://mantra.smartfren.com) was shut down and the last result was cloned in my own [website](https://smartfren.incodiy.com/login)
